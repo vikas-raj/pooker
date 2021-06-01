@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { ListComponent } from './component/list/list.component';
 import { CreateComponent } from './component/create/create.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +13,9 @@ import { CreateComponent } from './component/create/create.component';
     CreateComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    DashboardRoutingModule
   ]
 })
 export class DashboardModule { }

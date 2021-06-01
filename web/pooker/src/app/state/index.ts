@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import { appReducer } from './app.reducer';
 
 export interface IAppState {
-  error: string
+  error?: string
 }
 
 export const reducers: ActionReducerMap<any> = {
