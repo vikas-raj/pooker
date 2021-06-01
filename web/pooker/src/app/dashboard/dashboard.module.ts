@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './component/dashboard.component';
+import { DashboardComponent } from './dashboard.component';
 import { ListComponent } from './component/list/list.component';
 import { CreateComponent } from './component/create/create.component';
 
