@@ -1,4 +1,6 @@
 
+import { environment } from '../../environments/environment';
+
 export interface IAppState {
   error: string
 }
