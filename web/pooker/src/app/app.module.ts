@@ -5,12 +5,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './state';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppEffects } from './state/app.effects';
+import { AppEffect } from './state/app.effects';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,10 +20,9 @@ import { AppEffects } from './state/app.effects';
         strictActionImmutability: true
       }
     }),
-    EffectsModule.forRoot([AppEffects]),
-
+    EffectsModule.forRoot([AppEffect])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
