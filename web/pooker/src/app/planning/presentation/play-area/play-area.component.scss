@@ -1,0 +1,36 @@
+.score-card-number {
+  width: 78px;
+  font-size: 45px;
+  text-align: center;
+  border: 1px solid grey;
+  border-radius: 5px;
+  background-color: lawngreen;
+  color: white;
+}
+.user-name, .score-card-number, .dummy-score-card, .dummy-score-card-selected {
+  display: table;
+  height: 100px;
+  overflow: hidden;
+  FLOAT: left;
+  padding: 10px;
+}
+.dummy-score-card {
+  border: 1px solid #b7b2b2;
+  width: 78px;
+
+  i {
+    font-size: 45px;
+    background-color: transparent;
+    color: #b7b2b2;
+  }
+}
+.dummy-score-card-selected {
+  border: 1px solid #534e4e;
+  width: 78px;
+
+  i {
+    font-size: 45px;
+    background-color: transparent;
+    color: #534e4e;
+  }
+}

@@ -1,0 +1,109 @@
+.card {
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 100px;
+  height: 140px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  font-weight: bold;
+  color: white;
+  transform: scale(1);
+  transition: transform 100ms ease-in-out;
+
+  .small-card-id {
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    font-size: 20px;
+  }
+
+  .card-display {
+    position: relative;
+    padding-top: 40px;
+    font-size: 45px;
+  }
+}
+
+
+.card-in-hand {
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.card-rig {
+  width: 100px;
+  text-align: center;
+}
+
+.card-rig .perspective-wrapper {
+  perspective: 700px;
+  perspective-origin: 50% 50%;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100px;
+  height: 140px;
+  z-index: 1;
+}
+
+.card-rig .animation-wrapper {
+  will-change: transform;
+}
+
+.card-in-hand .card-container {
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 50%);
+}
+
+.card-container {
+  width: 100px;
+  height: 140px;
+  border-radius: 10px;
+}
+
+.card-blue .card-face {
+  background-color: #0466d2;
+  border: 2px solid rgb(4, 92, 189);
+}
+
+.small-card-id {
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  font-size: 20px;
+}
+
+.card-face .player-vote {
+  position: relative;
+  padding-top: 40px;
+  font-size: 45px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.card-in-hand:hover .card-container, .card-in-hand.selected .card-container {
+  transform: scale(1.2);
+  box-shadow: 0 0 30px rgb(0 0 0 / 50%);
+}
+
+
+
+
+.player-cards-wrapper {
+  position: relative;
+}
+.players-cards-container {
+  height: 120px;
+  min-height: 120px;
+  padding: 15px 0 0;
+  border-top: 1px solid #e6ebef;
+  z-index: 2;
+}

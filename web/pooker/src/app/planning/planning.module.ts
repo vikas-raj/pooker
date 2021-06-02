@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { PlanningShellComponent } from './container/planning-shell/planning-shell.component';
 import { PlanningComponent } from './presentation/planning/planning.component';
 import { PlanningRoutingModule } from './planning-routing.module';
-
-
+import { PlayCardsComponent } from './presentation/play-cards/play-cards.component';
+import { PlayAreaComponent } from './presentation/play-area/play-area.component';
 
 @NgModule({
   declarations: [
     PlanningShellComponent,
-    PlanningComponent
+    PlanningComponent,
+    PlayCardsComponent,
+    PlayAreaComponent
   ],
   imports: [
     CommonModule,
