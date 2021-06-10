@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./play-cards.component.scss']
 })
 export class PlayCardsComponent implements OnInit {
-  initialLeftValue = 20;
+  initialLeftValue = 2;
   selectedIndex?: number = undefined;
   constructor() { }
 
@@ -14,10 +14,8 @@ export class PlayCardsComponent implements OnInit {
   }
 
   getLeftValue(i: number) {
-    let zoom = ((window.outerWidth - 10) / window.innerWidth) * 100;
-
-    this.initialLeftValue = i == 0 ? 20 : this.initialLeftValue + 83;
-    return i == 0 ? 20 : this.initialLeftValue;
+    this.initialLeftValue = i == 0 ? 2 : this.initialLeftValue + 7.3;
+    return i == 0 ? 2 : this.initialLeftValue;
   }
   onClick(index: number) {
     this.selectedIndex = index;

@@ -1,7 +1,7 @@
 <div class="players-cards-container">
   <div class="player-cards-wrapper">
     <div class="card-rig card-in-hand" *ngFor="let card of [0,1,2,3,5,8,13, 21, 34, 55, 89, '?', 'Pass']; let i = index"
-         [ngStyle]="{'left': getLeftValue(i)+ 'px'}" [ngClass]="{'selected': selectedIndex == i}" (click)="onClick(i)">
+         [ngStyle]="{'left': getLeftValue(i)+ '%'}" [ngClass]="{'selected': selectedIndex == i}" (click)="onClick(i)">
       <div class="card-wrapper perspective-wrapper">
         <div class="animation-wrapper" style="transform: matrix(1, 0, 0, 1, 0, 0);"
              [ngStyle]="{'transform': selectedIndex == i ? 'matrix3d(0.977413, -0.211338, 0, 0, 0.210326, 0.972733, 0.0977468, 0, -0.0206576, -0.095539, 0.995211, 0, 0, -139.904, 0, 1)': 'matrix(1, 0, 0, 1, 0, 0)'}">
