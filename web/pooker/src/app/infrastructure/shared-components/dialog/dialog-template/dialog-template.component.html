@@ -1,21 +1,40 @@
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-
-  <form [formGroup]="dialogFormGroup">
-    <div *ngFor="let formElement of data.dialofForm">
-      <div [ngSwitch]="formElement.type">
-        <div *ngSwitchCase="'textBox'">
-          <input type="text" formControlName="{{formElement.name}}" />
+<div class="model-box">
+  <div class="header">
+    <div class="header-content">
+      Hello
+    </div>
+    <div class="close" (click)="onNoClick()">X</div>
+  </div>
+  <div class="body">
+    <form [formGroup]="dialogFormGroup" class="form">
+      <div *ngFor="let formElement of data.dialofForm">
+        <div [ngSwitch]="formElement.type">
+          <div *ngSwitchCase="'textBox'">
+            <div class="form-group">
+              <label for="{{formElement.name}}">{{formElement.title}}:</label>
+              <input type="text" class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
+                     placeholder="{{formElement.placeHolder}}">
+            </div>
+          </div>
+          <div *ngSwitchCase="'textArea'">
+            <div class="form-group">
+              <label for="{{formElement.name}}">{{formElement.title}}:</label>
+              <textarea class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
+                     placeholder="{{formElement.placeHolder}}"></textarea>
+            </div>
+          </div>
         </div>
       </div>
+    </form>
+  </div>
+  <div class="footer">
+    <div>
+      <button mat-raised-button (click)="onNoClick()" >No Thanks</button>
+      <button mat-raised-button (click)="onSubmit()" color="primary">Add</button>
     </div>
-  </form>
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button (click)="onSubmit()">Add</button>
 
-</div>
 
 
 <!-- Copyright 2021 Google LLC. All Rights Reserved.

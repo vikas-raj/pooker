@@ -17,7 +17,9 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     const dialogRef = this.dialog.open(DialogTemplateComponent, {
-      width: '250px',
+      width: '750px',
+      minHeight: '500px',
+      
       data: this.dialogConfig
     });
 

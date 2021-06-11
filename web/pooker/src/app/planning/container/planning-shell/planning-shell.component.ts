@@ -11,7 +11,7 @@ export class PlanningShellComponent implements OnInit {
   constructor() { }
   dialogConfig: DialogConfig = {
     title: "Hello",
-    dialofForm: [{ name: 'Test', placeHolder: 'Add text', title: 'Test', type: 'textBox', validators: [] }]
+    dialofForm: [{ name: 'Test', placeHolder: 'Add text', title: 'Test', type: 'textArea', validators: [] }]
   }
   ngOnInit(): void {
   }
