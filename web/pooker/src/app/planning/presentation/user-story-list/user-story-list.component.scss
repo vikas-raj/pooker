@@ -7,5 +7,14 @@
     .user-story-name {
       flex: 1;
     }
+
+    .user-story-point {
+      min-width: 25px;
+      text-align: center;
+    }
+
+    /*&:nth-child(2n) {
+      background-color: #e0dede;
+    }*/
   }
 }

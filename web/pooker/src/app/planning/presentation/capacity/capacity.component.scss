@@ -1,13 +1,16 @@
 .capacity {
   display: flex;
   width: 100%;
-  flex-basis: 1;
   height: inherit;
   align-items: center;
   justify-content: center;
 
   .hearder {
     display: flex;
-    flex-direction: column;
+    width: inherit;
+
+    .velocity-count {
+      margin-left: auto;
+    }
   }
 }

@@ -10,6 +10,19 @@
   .round-info-controls {
     //display: flex;
     min-height: 145px;
+
+    .navigator {
+      cursor: pointer;
+      top: 18%;
+
+      &.next-navigator {
+        background-image: url("./../../../../assets/images/navigate_next_black.svg");
+      }
+
+      &.before-navigator {
+        background-image: url("./../../../../assets/images/navigate_before_black.svg");
+      }
+    }
   }
 
   .all-players-cards-selected {

@@ -6,3 +6,12 @@
   overflow: hidden !important;
   height: inherit !important;
 }
+.navigator {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  background-position-x: 10%;
+  background-position-y: 50%;
+  position: absolute;
+  cursor: pointer;
+}

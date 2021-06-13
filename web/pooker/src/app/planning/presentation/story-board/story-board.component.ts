@@ -9,6 +9,8 @@ export class StoryBoardComponent implements OnInit {
 
   constructor() { }
 
+  currentUserStory = 1;
+  totolUserStoryCount = 10;
   ngOnInit(): void {
   }
 

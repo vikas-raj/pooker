@@ -6,23 +6,54 @@
   .capacity {
     display: flex;
     width: 100%;
-    app-capacity{
-        width:inherit;
+    background-color: #808080;
+    color: #fff;
+    padding: 0 10px;
+
+    app-capacity {
+      width: inherit;
+    }
+  }
+
+  .header {
+    text-align: center;
+    background-color: #808080;
+    color: #fff;
+  }
+
+  .header-titles {
+    display: flex;
+    justify-content: space-between;
+    margin: 3px 20px;
+  }
+
+  .current-story-number {
+    text-align: center;
+    padding: 10px;
+
+    .navigator {
+      border: 1px solid #b7b2b2;
+      cursor: pointer;
+
+      &.next-navigator {
+        right: 34%;
+        background-image: url("./../../../../assets/images/navigate_next_black.svg");
+      }
+
+      &.before-navigator {
+        left: 34%;
+        background-image: url("./../../../../assets/images/navigate_before_black.svg");
+      }
     }
   }
 
   .user-story-list {
     -ms-flex: 1 auto;
     flex: 1 auto;
-    padding: 15px;
-    padding-bottom: 30px;
     overflow-y: auto;
   }
 
   .operation {
-    height: 120px;
-    min-height: 120px;
-    padding: 15px 0 0;
     border-top: 1px solid #e6ebef;
     z-index: 2;
   }

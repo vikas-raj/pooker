@@ -2,7 +2,14 @@
   <div class="capacity">
     <app-capacity></app-capacity>
   </div>
+  <div class="current-story-number">
+    <span class="navigator before-navigator"></span> {{currentUserStory}}/{{totolUserStoryCount}}<span class="navigator next-navigator"></span>
+  </div>
   <div class="header">User Story List</div>
+  <div class="header-titles">
+    <div class="user-story-name"> Story Name</div>
+    <div class="user-story-point"> Point</div>
+  </div>
   <div class="user-story-list">
     <app-user-story-list></app-user-story-list>
   </div>

@@ -10,6 +10,7 @@ export class CapacityComponent implements OnInit {
   constructor() { }
   actualVelocity = 10;
   totalVelocity = 100;
+
   ngOnInit(): void {
   }
 
