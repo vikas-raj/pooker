@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pooker.api", "pooker.api\pooker.api.csproj", "{6857C366-91C9-45EC-954D-E60B1FB6B32B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pooker.api", "pooker.api\pooker.api.csproj", "{6857C366-91C9-45EC-954D-E60B1FB6B32B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pooker.ApplicationService", "Pooker.ApplicationService\Pooker.ApplicationService.csproj", "{C42CE76E-94CF-4C60-84C2-F718A0C1F0E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6857C366-91C9-45EC-954D-E60B1FB6B32B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6857C366-91C9-45EC-954D-E60B1FB6B32B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6857C366-91C9-45EC-954D-E60B1FB6B32B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C42CE76E-94CF-4C60-84C2-F718A0C1F0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42CE76E-94CF-4C60-84C2-F718A0C1F0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42CE76E-94CF-4C60-84C2-F718A0C1F0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42CE76E-94CF-4C60-84C2-F718A0C1F0E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

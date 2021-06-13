@@ -3,3 +3,13 @@
 ################################################################################
 
 /.vs/pooker/config
+/.vs/
+/.vs/pooker/*
+/pooker.api/.vs/
+/pooker.api/.vs/pooker.api/
+/pooker.api/pooker.api/obj/
+/pooker.api/pooker.api/bin/
+/pooker.api/pooker.ApplicationService/bin/
+/pooker.api/pooker.ApplicationService/obj/
+/pooker.api/**/bin/
+/pooker.api/**/obj/
