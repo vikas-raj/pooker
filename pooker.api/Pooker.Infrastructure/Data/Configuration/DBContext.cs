@@ -5,6 +5,7 @@ using System.Text;
 namespace Pooker.Infrastructure.Data.Configuration
 {
     using Microsoft.EntityFrameworkCore;
+    using Pooker.Domain.Domain;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -16,7 +17,8 @@ namespace Pooker.Infrastructure.Data.Configuration
         }
         public DBContext(DbContextOptions<DBContext> options)
             : base(options) { }
-        //public DbSet<Entity> Entity { get; set; }
+        
+        public DbSet<Entity> Entity { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
