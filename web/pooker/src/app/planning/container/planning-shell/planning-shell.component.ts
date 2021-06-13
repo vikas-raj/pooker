@@ -7,7 +7,7 @@ import { DialogConfig } from '../../../infrastructure/shared-components/dialog/d
   styleUrls: ['./planning-shell.component.scss']
 })
 export class PlanningShellComponent implements OnInit {
-
+opened: boolean=false;
   constructor() { }
   dialogConfig: DialogConfig = {
     title: "Hello",

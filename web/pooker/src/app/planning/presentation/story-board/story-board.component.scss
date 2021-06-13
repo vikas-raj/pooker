@@ -1,0 +1,29 @@
+.story-board {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 58px);
+
+  .capacity {
+    display: flex;
+    width: 100%;
+    app-capacity{
+        width:inherit;
+    }
+  }
+
+  .user-story-list {
+    -ms-flex: 1 auto;
+    flex: 1 auto;
+    padding: 15px;
+    padding-bottom: 30px;
+    overflow-y: auto;
+  }
+
+  .operation {
+    height: 120px;
+    min-height: 120px;
+    padding: 15px 0 0;
+    border-top: 1px solid #e6ebef;
+    z-index: 2;
+  }
+}

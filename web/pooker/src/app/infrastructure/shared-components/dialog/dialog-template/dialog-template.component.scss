@@ -1,6 +1,6 @@
 .model-box {
   justify-content: space-between;
-  height: 500px;
+  min-height: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -42,8 +42,9 @@
   }
 
   .body {
-    flex: 1;
     padding: 10px;
+    flex: 1 auto;
+    overflow-y: auto;
 
     label {
       font-weight: 700;

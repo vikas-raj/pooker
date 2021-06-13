@@ -1,0 +1,11 @@
+.user-story-list-body {
+  .user-story {
+    display: flex;
+    border: 1px solid #eadddd;
+    padding: 5px;
+
+    .user-story-name {
+      flex: 1;
+    }
+  }
+}

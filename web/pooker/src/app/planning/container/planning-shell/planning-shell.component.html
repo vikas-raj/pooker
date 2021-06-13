@@ -1,22 +1,35 @@
-<div class="game">
-  <div class="game-main-content">
-    <div class="game-board">
-      <div class="round-info-controls">
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <div class="game-sidebar">
+      <app-story-board></app-story-board>
+    </div>
+  </mat-sidenav>
 
-      </div>
-      <div class="all-players-cards-selected">
-        <div class="scroll-container flex">
-          <app-play-area></app-play-area>
+  <mat-sidenav-content>
+    <div class="example-events">
+      <div class="game">
+        <div class="game-main-content">
+          <div class="game-board">
+            <div class="round-info-controls">
+              <p><button mat-button (click)="sidenav.toggle()">Story Table</button></p>
+            </div>
+            <div class="all-players-cards-selected">
+              <div class="scroll-container flex">
+                <app-play-area></app-play-area>
+              </div>
+            </div>
+            <div class="players-cards-container">
+              <app-play-cards></app-play-cards>
+
+            </div>
+          </div>
         </div>
       </div>
-      <div class="players-cards-container">
-        <app-play-cards></app-play-cards>
-
-      </div>
     </div>
-    <div class="game-sidebar">
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
-    </div>
-  </div>
-</div>
+
+
+
 <app-dialog [dialogConfig]="dialogConfig"></app-dialog>

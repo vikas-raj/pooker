@@ -34,11 +34,15 @@
 }
 @media (min-width: 1200px) {
   .game-board {
-    width: 80% !important;
+    width: 100% !important;
   }
 
   .game-sidebar {
+    height: 100%;
+  }
+  .mat-sidenav {
     width: 20% !important;
+    overflow:hidden !important;
   }
 }
 
@@ -60,7 +64,7 @@
       overflow: hidden;
 
       .game-board {
-        width: 75%;
+        width: 100%;
         display: -ms-flexbox;
         display: flex;
         -ms-flex-flow: column nowrap;
@@ -73,12 +77,17 @@
         }
       }
 
+      .mat-sidenav {
+        width: 25% !important;
+        overflow: hidden !important;
+      }
+
       .game-sidebar {
+        height: 100%;
         display: -ms-flexbox;
         display: flex;
         -ms-flex-flow: column nowrap;
         flex-flow: column nowrap;
-        width: 25%;
         min-width: 240px;
         background-color: #f2f2f2;
       }
