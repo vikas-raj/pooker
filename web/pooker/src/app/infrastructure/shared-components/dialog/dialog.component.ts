@@ -1,8 +1,8 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTemplateComponent } from './dialog-template/dialog-template.component';
-import { DialogConfig } from './dialog.config';
+import { DialogConfig, DialogResponse } from './dialog.config';
 
 @Component({
   selector: 'app-dialog',
@@ -13,6 +13,8 @@ export class DialogComponent implements OnInit {
   form?: FormGroup;
 
   @Input() dialogConfig?: DialogConfig;
+
+  @Output() dialogResponse: EventEmitter<DialogResponse> = new EventEmitter();
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -24,6 +26,7 @@ export class DialogComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.dialogResponse.emit(result);
       console.log('The dialog was closed');
     });
   }

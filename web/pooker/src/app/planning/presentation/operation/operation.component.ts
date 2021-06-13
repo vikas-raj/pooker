@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-operation',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./operation.component.scss']
 })
 export class OperationComponent implements OnInit {
-
+  @Output() addNewUserStory: EventEmitter<boolean> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onAddNewuserStory() {
+    this.addNewUserStory.emit(true);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-story-board',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./story-board.component.scss']
 })
 export class StoryBoardComponent implements OnInit {
+  @Output() addNewUserStory: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }
 
@@ -13,5 +14,7 @@ export class StoryBoardComponent implements OnInit {
   totolUserStoryCount = 10;
   ngOnInit(): void {
   }
-
+  onAddNewUserStory($event: boolean) {
+    this.addNewUserStory.emit($event);
+  }
 }

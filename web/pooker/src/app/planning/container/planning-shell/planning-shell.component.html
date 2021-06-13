@@ -1,7 +1,7 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" [(opened)]="opened">
     <div class="game-sidebar">
-      <app-story-board></app-story-board>
+      <app-story-board (addNewUserStory)="onAddNewUserStory($event)"></app-story-board>
     </div>
   </mat-sidenav>
 
@@ -35,7 +35,4 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-
-
-
-<app-dialog [dialogConfig]="dialogConfig"></app-dialog>
+<app-dialog *ngIf="showAddNewUserStory" (dialogResponse)="dialogResponse($event)" [dialogConfig]="dialogConfig" ></app-dialog>
