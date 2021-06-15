@@ -17,6 +17,7 @@ namespace Pooker.Infrastructure.Data.Mapping
             builder.Property(f => f.CreatedOn).HasColumnType("datetimeoffset");
             builder.Property(f => f.UpdatedBy).HasColumnType("nvarchar(255)");
             builder.Property(f => f.UpdatedOn).HasColumnType("datetimeoffset");
+
         }
     }
 }

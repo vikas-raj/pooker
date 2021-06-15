@@ -12,6 +12,7 @@
         public DateTimeOffset CreatedOn { get; set; }
         public string UpdatedBy { get; set; }
         public DateTimeOffset UpdatedOn { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
  

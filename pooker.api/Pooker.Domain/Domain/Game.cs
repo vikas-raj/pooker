@@ -17,6 +17,8 @@ namespace Pooker.Domain.Domain
         public int MeinGame { get; set; }
         public bool IsAutoFlip { get; set; }
         public bool AllowUserToChangeVote { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
         public ICollection<UserStoryDetail> UserStoryDetails { get; set; }
 
     }
