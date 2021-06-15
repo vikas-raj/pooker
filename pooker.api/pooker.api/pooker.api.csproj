@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pooker.ApplicationService\Pooker.ApplicationService.csproj" />
     <ProjectReference Include="..\Pooker.Infrastructure\Pooker.Infrastructure.csproj" />
   </ItemGroup>
 
