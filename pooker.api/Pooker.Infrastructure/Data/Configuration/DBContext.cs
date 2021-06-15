@@ -6,9 +6,6 @@ namespace Pooker.Infrastructure.Data.Configuration
 {
     using Microsoft.EntityFrameworkCore;
     using Pooker.Domain.Domain;
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     public class DBContext : DbContext
     {
         public DBContext()
@@ -28,7 +25,6 @@ namespace Pooker.Infrastructure.Data.Configuration
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
     }
