@@ -23,6 +23,18 @@
                      placeholder="{{formElement.placeHolder}}"></textarea>
             </div>
           </div>
+          <div *ngSwitchCase="'radio'" class="radio-input">
+            <div class="form-group">
+              <label>{{formElement.title}}</label>
+              <div>
+                <span *ngFor="let option of formElement.options">
+                  <input type="radio" name="{{formElement.name}}" value="{{option.value}}" id="{{option.key}}"
+                  formControlName="{{formElement.name}}">
+                  <label [attr.for]="option.key" class="radio-value">{{option.value}}</label>
+                </span>
+              </div>
+          </div>
+          </div>
         </div>
       </div>
     </form>

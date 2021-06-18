@@ -11,15 +11,19 @@ export class DialogCDontent {
   isPrimary?: string;
 }
 
-export class DialogForm {
+export interface DialogForm {
   name?: string;
   title?: string;
   type?: string;
   placeHolder?: string;
   class?: string;
   validators?: any[];
+  options?: IOption[];
 }
-
+export interface IOption{
+  key: string;
+  value: string;
+}
 export class DialogResponse {
   eventType?: string;
   formValues?: any;

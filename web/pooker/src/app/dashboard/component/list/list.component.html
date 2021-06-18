@@ -1,1 +1,9 @@
-<p>list works!</p>
+<div class="game-list" *ngFor="let game of games">
+    {{game.name}}
+    {{game.velocity}}
+    {{game.description}}
+    {{game.userStoryDetails.length}}
+    {{sumOfStoryPoints(game.userStoryDetails)}}
+    {{game.createdDate}}
+    {{game.name}}
+</div>>
