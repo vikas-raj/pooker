@@ -9,12 +9,25 @@ import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 })
 export class ListComponent implements OnInit {
 
-  games: IGame[] = [];
+  games: IGame[] = [
+    {
+      name: 'Game 1', velocity: 100, description: 'description test',
+      createdDate: new Date(), userStoryDetails: [],
+    },
+    {
+      name: 'Game 2', velocity: 10, description: 'description test2',
+      createdDate: new Date(), userStoryDetails: [],
+    },
+    {
+      name: 'Game 3', velocity: 10, description: 'description test2',
+      createdDate: new Date(), userStoryDetails: [],
+    }
+  ];
   constructor() { }
   ngOnInit(): void {
   }
-  sumOfStoryPoints(userStoryDetails: IUserStoryDetail[]) {
-    return userStoryDetails.map(x => x.storyPoint).reduce((prev, next) => prev + next);
+  sumOfStoryPoints(userStoryDetails?: IUserStoryDetail[]) {
+    return userStoryDetails?.map(x => x.storyPoint)?.reduce((prev, next) => prev + next, 0);
   }
 
 }

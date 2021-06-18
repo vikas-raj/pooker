@@ -1,13 +1,13 @@
-
 <table class="table">
-    <thead class="thead-dark">
+    <thead class="table-dark">
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Velocity</th>
-          <th scope="col">Description</th>
-          <th scope="col">Total User Stories</th>
-          <th scope="col">Total Efforts</th>
-          <th scope="col">Created Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Velocity</th>
+            <th scope="col">Description</th>
+            <th scope="col">Total User Stories</th>
+            <th scope="col">Total Efforts</th>
+            <th scope="col">Total Users </th>
+            <th scope="col">Created Date</th>
         </tr>
     </thead>
     <tbody>
@@ -15,9 +15,10 @@
             <td>{{game.name}}</td>
             <td>{{game.velocity}}</td>
             <td>{{game.description}}</td>
-            <td>{{game.userStoryDetails.length}}</td>
+            <td>{{game.userStoryDetails?.length}}</td>
             <td>{{sumOfStoryPoints(game.userStoryDetails)}}</td>
-            <td>{{game.createdDate}}</td>
+            <td>Total Users </td>
+            <td>{{game.createdDate | date: 'short'}}</td>
         </tr>
     </tbody>
 </table>
