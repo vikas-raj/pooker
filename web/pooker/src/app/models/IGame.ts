@@ -11,5 +11,6 @@ export interface IGame {
     isAutoFlip: boolean;
     allowUserToChangeVote:boolean;
     user: IUser;
+    createdDate?: Date;
     userStoryDetails: IUserStoryDetail[]
 }

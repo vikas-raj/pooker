@@ -9,7 +9,7 @@ import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 })
 export class ListComponent implements OnInit {
 
-  gameList: IGame[] = [];
+  games: IGame[] = [];
   constructor() { }
   ngOnInit(): void {
   }
