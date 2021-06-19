@@ -5,6 +5,7 @@ import { ListComponent } from './component/list/list.component';
 import { CreateComponent } from './component/create/create.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FormsModule } from '@angular/forms';
+import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    InfrastructureModule,
     DashboardRoutingModule
   ]
 })

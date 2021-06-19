@@ -4,11 +4,13 @@ import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogComponent } from './shared-components/dialog/dialog.component';
 import { DialogTemplateComponent } from './shared-components/dialog/dialog-template/dialog-template.component';
+import { GenericFormComponent } from './shared-components/generic-form/generic-form.component';
 
 @NgModule({
   declarations: [
     DialogComponent,
-    DialogTemplateComponent
+    DialogTemplateComponent,
+    GenericFormComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,7 @@ import { DialogTemplateComponent } from './shared-components/dialog/dialog-templ
   ],
   exports: [
     CommonModule,
-    MaterialModule,
+    MaterialModule, GenericFormComponent,
     DialogComponent, DialogTemplateComponent
   ],
   entryComponents: [DialogTemplateComponent]

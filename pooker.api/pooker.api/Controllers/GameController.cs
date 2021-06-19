@@ -12,23 +12,25 @@ namespace pooker.api.Controllers
     public class GameController : ControllerBase
     {
         private IQueryServiceAsync queryServiceAsync = null;
-
-        public GameController(IQueryServiceAsync queryServiceAsync)
+        private ICommandServiceAsync commandServiceAsync = null;
+        public GameController(IQueryServiceAsync queryServiceAsync, ICommandServiceAsync commandServiceAsync)
         {
+            this.commandServiceAsync = commandServiceAsync;
             this.queryServiceAsync = queryServiceAsync;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGameById(int id)
         {
-            var getGameQuery = new GetGameQueryById(1);
+            var getGameQuery = new GetGameQueryById(id);
             var res = await this.queryServiceAsync.ExecuteAsync(getGameQuery);
-            return this.Ok();
+            return this.Ok(res);
         }
 
         public async Task<IActionResult> CreateGame([FromBody]GameRequest req)
         {
-            var asd = new InsertUpdateGameCommand(req);
+            var insertUpdateGameCommand = new InsertUpdateGameCommand(req);
+            await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
             return this.Ok();
         }
     }

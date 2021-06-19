@@ -7,7 +7,7 @@
   </div>
   <div class="body">
     <form [formGroup]="dialogFormGroup" class="form">
-      <div *ngFor="let formElement of data.dialofForm">
+      <div *ngFor="let formElement of data.dialogForm">
         <div [ngSwitch]="formElement.type">
           <div *ngSwitchCase="'textBox'">
             <div class="form-group">

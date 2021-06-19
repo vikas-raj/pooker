@@ -12,7 +12,7 @@ opened: boolean=false;
   showAddNewUserStory = false;
   dialogConfig: DialogConfig = {
     title: "Hello",
-    dialofForm: [{ name: 'Test', placeHolder: 'Add text', title: 'Test', type: 'textArea', validators: [] },
+    dialogForm: [{ name: 'Test', placeHolder: 'Add text', title: 'Test', type: 'textArea', validators: [] },
     { name: 'Radio', placeHolder: 'Add text', title: 'Select Any option', type: 'radio', validators: [],
      options: [{key:'radio1', value: 'Radio 1' },{key:'radio2', value: 'Radio 2' }] }]
   }

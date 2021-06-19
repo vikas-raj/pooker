@@ -1,7 +1,7 @@
 export class DialogConfig {
   title?: string;
   contents?: DialogCDontent[];
-  dialofForm?: DialogForm[];
+  dialogForm?: GenericForm[];
   dialogFormValues?: any;
 }
 
@@ -11,7 +11,7 @@ export class DialogCDontent {
   isPrimary?: string;
 }
 
-export interface DialogForm {
+export interface GenericForm {
   name?: string;
   title?: string;
   type?: string;

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogConfig, DialogForm, DialogResponse } from '../dialog.config';
+import { DialogConfig, GenericForm, DialogResponse } from '../dialog.config';
 
 @Component({
   selector: 'app-dialog-template',
@@ -14,9 +14,9 @@ export class DialogTemplateComponent implements OnInit {
     private dialogRef: MatDialogRef<DialogTemplateComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogConfig) { }
 
   ngOnInit(): void {
-    if (this.data.dialofForm) {
+    if (this.data.dialogForm) {
       let group: any = {}
-      this.data.dialofForm.forEach((formGroup: DialogForm) => {
+      this.data.dialogForm.forEach((formGroup: GenericForm) => {
         if (formGroup.name) {
           group[formGroup.name] = new FormControl('', formGroup.validators);
         }

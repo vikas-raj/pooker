@@ -32,6 +32,7 @@ namespace pooker.api
             services.AddDbContext<DBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("PookerConnectionString")));
             services.AddTransient<IQueryServiceAsync, QueryServiceAsync>();
+            services.AddTransient<ICommandServiceAsync, CommandServiceAsync>();
 
             services.AddSwaggerGen(options =>
             {
