@@ -24,7 +24,7 @@ export class GenericFormComponent implements OnInit {
       });
       this.genericFormGroup = new FormGroup(group);
       if (this.formValues) {
-        this.genericFormGroup.setValue(this.formValues);
+        this.genericFormGroup?.setValue(this.formValues);
       }
     }
   }

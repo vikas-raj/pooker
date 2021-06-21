@@ -6,12 +6,18 @@ import { NgModule } from "@angular/core";
 
 const routes: Routes = [{
   path: '', component: DashboardComponent,
-  children: [{
-    path: '', component: ListComponent
-  },
-  {
-    path: 'create', component: CreateComponent
-  }
+  children: [
+    {
+      path: 'edit/:id', component: CreateComponent, pathMatch: 'full'
+    },
+    {
+      path: 'create', component: CreateComponent, pathMatch: 'full'
+    }, {
+      path: '', component: ListComponent, pathMatch: 'full'
+    },
+    {
+      path: '**', component: ListComponent, pathMatch: 'full'
+    },
   ]
 }]
   ;

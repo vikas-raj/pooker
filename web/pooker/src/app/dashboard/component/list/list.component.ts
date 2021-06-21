@@ -1,4 +1,6 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IGame } from 'src/app/models/IGame';
 import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 
@@ -11,23 +13,32 @@ export class ListComponent implements OnInit {
 
   games: IGame[] = [
     {
-      name: 'Game 1', velocity: 100, description: 'description test',
+      id: 1, name: 'Game 1', velocity: 100, description: 'description test',
       createdDate: new Date(), userStoryDetails: [],
     },
     {
-      name: 'Game 2', velocity: 10, description: 'description test2',
+      id: 2, name: 'Game 2', velocity: 10, description: 'description test2',
       createdDate: new Date(), userStoryDetails: [],
     },
     {
-      name: 'Game 3', velocity: 10, description: 'description test2',
+      id: 3, name: 'Game 3', velocity: 10, description: 'description test2',
       createdDate: new Date(), userStoryDetails: [],
     }
   ];
-  constructor() { }
+  constructor(private route: Router) { }
   ngOnInit(): void {
   }
   sumOfStoryPoints(userStoryDetails?: IUserStoryDetail[]) {
     return userStoryDetails?.map(x => x.storyPoint)?.reduce((prev, next) => prev + next, 0);
   }
 
+  onEdit(id: number | undefined): void {
+      this.route.navigate(['/dashboard/edit', id]);
+  }
+  onDelete(id: number | undefined): void {
+    // delete operation
+  }
+  onCreate() {
+    this.route.navigate(['/dashboard/create']);
+  }
 }

@@ -1,24 +1,30 @@
 <table class="table">
-    <thead class="table-dark">
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Velocity</th>
-            <th scope="col">Description</th>
-            <th scope="col">Total User Stories</th>
-            <th scope="col">Total Efforts</th>
-            <th scope="col">Total Users </th>
-            <th scope="col">Created Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="game-list" *ngFor="let game of games">
-            <td>{{game.name}}</td>
-            <td>{{game.velocity}}</td>
-            <td>{{game.description}}</td>
-            <td>{{game.userStoryDetails?.length}}</td>
-            <td>{{sumOfStoryPoints(game.userStoryDetails)}}</td>
-            <td>Total Users </td>
-            <td>{{game.createdDate | date: 'short'}}</td>
-        </tr>
-    </tbody>
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Velocity</th>
+      <th scope="col">Description</th>
+      <th scope="col">Total User Stories</th>
+      <th scope="col">Total Efforts</th>
+      <th scope="col">Total Users </th>
+      <th scope="col">Created Date</th>
+      <th><button (click)="onCreate()">Create New</button></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="game-list" *ngFor="let game of games">
+      <td>{{game.name}}</td>
+      <td>{{game.velocity}}</td>
+      <td>{{game.description}}</td>
+      <td>{{game.userStoryDetails?.length}}</td>
+      <td>{{sumOfStoryPoints(game.userStoryDetails)}}</td>
+      <td>Total Users </td>
+      <td>{{game.createdDate | date: 'short'}}</td>
+      <td class="fa-icon-operation">
+        <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(game.id)"></i>
+        <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEdit(game.id)"></i>
+
+      </td>
+    </tr>
+  </tbody>
 </table>
