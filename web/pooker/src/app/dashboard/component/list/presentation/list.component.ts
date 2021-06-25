@@ -5,7 +5,7 @@ import { IGame } from 'src/app/models/IGame';
 import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-dashboard-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })

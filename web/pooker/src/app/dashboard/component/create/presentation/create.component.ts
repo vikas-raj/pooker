@@ -3,7 +3,7 @@ import { GenericForm } from 'src/app/infrastructure/shared-components/dialog/dia
 import { IGenericFormResponse } from '../../../../models/IGenericFormResponse';
 
 @Component({
-  selector: 'app-create',
+  selector: 'app-dashboard-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
