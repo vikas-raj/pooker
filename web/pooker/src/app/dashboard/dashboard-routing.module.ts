@@ -1,22 +1,22 @@
 import { RouterModule, Routes } from "@angular/router";
-import { CreateComponent } from "./component/create/create.component";
 import { DashboardComponent } from "./dashboard.component";
-import { ListComponent } from "./component/list/list.component";
 import { NgModule } from "@angular/core";
+import { CreateShellComponent } from './component/create/container/create-shell/create-shell.component';
+import { ListShellComponent } from './component/list/container/list-shell/list-shell.component';
 
 const routes: Routes = [{
   path: '', component: DashboardComponent,
   children: [
     {
-      path: 'edit/:id', component: CreateComponent, pathMatch: 'full'
+      path: 'edit/:id', component: CreateShellComponent, pathMatch: 'full'
     },
     {
-      path: 'create', component: CreateComponent, pathMatch: 'full'
+      path: 'create', component: CreateShellComponent, pathMatch: 'full'
     }, {
-      path: '', component: ListComponent, pathMatch: 'full'
+      path: '', component: ListShellComponent, pathMatch: 'full'
     },
     {
-      path: '**', component: ListComponent, pathMatch: 'full'
+      path: '**', component: ListShellComponent, pathMatch: 'full'
     },
   ]
 }]

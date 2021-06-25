@@ -1,0 +1,24 @@
+.form-group {
+  margin-bottom: 15px;
+
+  .title {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .radio-button {
+    margin-right: 0px;
+  }
+
+  .radio-value {
+    margin: 0 25px 5px 10px;
+  }
+
+  .btn {
+    margin-right: 20px;
+
+    &.btn-cancel {
+      border: 1px solid #0d6efd  ;
+    }
+  }
+}

@@ -22,7 +22,8 @@ export interface GenericForm {
 }
 export interface IOption{
   key: string;
-  value: string;
+  value: any;
+  id?: string;
 }
 export class DialogResponse {
   eventType?: string;

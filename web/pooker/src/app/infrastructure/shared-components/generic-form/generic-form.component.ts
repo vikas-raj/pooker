@@ -1,5 +1,7 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { IGenericFormResponse } from '../../../models/IGenericFormResponse';
+import { ResponseEnum } from '../../../models/ResponseEnum';
 import { GenericForm } from '../dialog/dialog.config';
 
 @Component({
@@ -11,7 +13,7 @@ export class GenericFormComponent implements OnInit {
   genericFormGroup: FormGroup = new FormGroup({});
   @Input() formGroupInput: any[] = [];
   @Input() formValues: any = {};
-
+  @Output() outputFormResponse = new EventEmitter<IGenericFormResponse>();
   constructor() { }
 
   ngOnInit(): void {
@@ -29,4 +31,19 @@ export class GenericFormComponent implements OnInit {
     }
   }
 
+  onSubmit() {
+    const response: IGenericFormResponse = {
+      response: this.genericFormGroup.value,
+      responseType: ResponseEnum.Submit
+    }
+    this.outputFormResponse.emit(response);
+  }
+
+  onCancel() {
+    const response: IGenericFormResponse = {
+      response: this.genericFormGroup.value,
+      responseType: ResponseEnum.Cancel
+    }
+    this.outputFormResponse.emit(response);
+  }
 }

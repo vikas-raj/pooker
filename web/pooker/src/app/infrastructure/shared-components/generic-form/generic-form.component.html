@@ -1,32 +1,40 @@
 <form [formGroup]="genericFormGroup" class="form">
-    <div *ngFor="let formElement of formGroupInput">
-      <div [ngSwitch]="formElement.type">
-        <div *ngSwitchCase="'textBox'">
-          <div class="form-group">
-            <label for="{{formElement.name}}">{{formElement.title}}:</label>
-            <input type="text" class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
-                   placeholder="{{formElement.placeHolder}}">
+  <div *ngFor="let formElement of formGroupInput">
+    <div [ngSwitch]="formElement.type">
+      <div *ngSwitchCase="'textBox'">
+        <div class="form-group">
+          <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
+          <input type="text" class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
+                 placeholder="{{formElement.placeHolder}}">
+        </div>
+      </div>
+      <div *ngSwitchCase="'textArea'">
+        <div class="form-group">
+          <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
+          <textarea class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
+                    placeholder="{{formElement.placeHolder}}"></textarea>
+        </div>
+      </div>
+      <div *ngSwitchCase="'radio'" class="radio-input">
+        <div class="form-group">
+          <label class="title">{{formElement.title}}</label>
+          <div>
+            <span *ngFor="let option of formElement.options">
+              <input type="radio" name="{{formElement.name}}" class="radio-button" value="{{option.value}}" id="{{option.id}}"
+                     formControlName="{{formElement.name}}">
+              <label [attr.for]="option.id" class="radio-value">{{option.key}}</label>
+            </span>
           </div>
-        </div>
-        <div *ngSwitchCase="'textArea'">
-          <div class="form-group">
-            <label for="{{formElement.name}}">{{formElement.title}}:</label>
-            <textarea class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
-                   placeholder="{{formElement.placeHolder}}"></textarea>
-          </div>
-        </div>
-        <div *ngSwitchCase="'radio'" class="radio-input">
-          <div class="form-group">
-            <label>{{formElement.title}}</label>
-            <div>
-              <span *ngFor="let option of formElement.options">
-                <input type="radio" name="{{formElement.name}}" value="{{option.value}}" id="{{option.key}}"
-                formControlName="{{formElement.name}}">
-                <label [attr.for]="option.key" class="radio-value">{{option.value}}</label>
-              </span>
-            </div>
-        </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
+  <div class="button-operation">
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="onSubmit()">Save</button>
+      <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+
+    </div>
+
+  </div>
+</form>
