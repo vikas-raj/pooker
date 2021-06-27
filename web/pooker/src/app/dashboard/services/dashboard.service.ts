@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { IGame } from "../../models/IGame";
 import { IGameRequest } from "../models/IGameRequest";
+import { API_Constants } from "../../infrastructure/constants/api-constants";
 
 @Injectable()
 export class DashboardService {
@@ -11,10 +12,12 @@ export class DashboardService {
   }
 
   getGames(): Observable<IGame[]> {
-    return this.httpClient.get<IGame[]>('');
+    const url = API_Constants.GET_GAMES;
+    return this.httpClient.get<IGame[]>(url);
   }
 
   saveGame(gameRequest: IGameRequest): Observable<any> {
-    return this.httpClient.post<any>('', gameRequest);
+    const url = API_Constants.SAVE_GAME;
+    return this.httpClient.post<any>(url, gameRequest);
   }
 }

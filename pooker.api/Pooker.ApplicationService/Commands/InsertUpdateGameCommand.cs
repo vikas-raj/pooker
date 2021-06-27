@@ -23,7 +23,7 @@
             return new Game()
             {
                 AllowUserToChangeVote = this.gameRequest.AllowUserToChangeVote,
-                MeinGame = this.gameRequest.MeinGame,
+                MeInGame = this.gameRequest.MeInGame,
                 IsAutoFlip = this.gameRequest.IsAutoFlip,
                 Name = this.gameRequest.Name,
                 Description = this.gameRequest.Description,

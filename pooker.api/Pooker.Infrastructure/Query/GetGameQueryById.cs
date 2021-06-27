@@ -11,10 +11,10 @@ namespace Pooker.Infrastructure.Query
 {
     public class GetGameQueryById : QueryAsync<Game, DBContext>
     {
-        private readonly int GameId;
-        public GetGameQueryById(int id)
+        private readonly string GameGuidId;
+        public GetGameQueryById(string id)
         {
-            this.GameId = id;
+            this.GameGuidId = id;
         }
 
         public override async Task<Game> ExecuteAsync(DBContext dbContext)
@@ -22,7 +22,7 @@ namespace Pooker.Infrastructure.Query
             return dbContext.Game.AsNoTracking()
                             .Include(x => x.UserStoryDetails)
                             .ThenInclude(x => x.GameBoards)
-                            .FirstOrDefault(x => x.ID == this.GameId);
+                            .FirstOrDefault(x => x.Guid == this.GameGuidId);
         }
     }
 }

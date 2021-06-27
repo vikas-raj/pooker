@@ -10,6 +10,7 @@ namespace Pooker.Domain.Domain
         {
             this.UserStoryDetails = new HashSet<UserStoryDetail>();
         }
+        public string Guid { get; set; }
         public int Velocity { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
