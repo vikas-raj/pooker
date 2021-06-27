@@ -8,6 +8,11 @@ import { CreateShellComponent } from './component/create/container/create-shell/
 import { ListShellComponent } from './component/list/container/list-shell/list-shell.component';
 import { ListComponent } from './component/list/presentation/list.component';
 import { CreateComponent } from './component/create/presentation/create.component';
+import { DashboardEffect } from './state/dashboard.effects';
+import { DashboardService } from './services/dashboard.service';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { dashboardReducer } from './state/dashboard.reducers';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,10 @@ import { CreateComponent } from './component/create/presentation/create.componen
     CommonModule,
     FormsModule,
     InfrastructureModule,
-    DashboardRoutingModule
-  ]
+    DashboardRoutingModule,
+    EffectsModule.forFeature([DashboardEffect]),
+    StoreModule.forFeature('DashboardState', dashboardReducer)
+  ],
+  providers: [DashboardEffect, DashboardService]
 })
 export class DashboardModule { }

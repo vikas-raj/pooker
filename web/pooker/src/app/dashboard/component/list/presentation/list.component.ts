@@ -1,5 +1,5 @@
 import { Route } from '@angular/compiler/src/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { IGame } from 'src/app/models/IGame';
 import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
@@ -10,8 +10,9 @@ import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  @Input() games: IGame[] | null = [];
 
-  games: IGame[] = [
+  games1: IGame[] = [
     {
       id: 1, name: 'Game 1', velocity: 100, description: 'description test',
       createdDate: new Date(), userStoryDetails: [],

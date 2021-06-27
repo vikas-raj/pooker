@@ -28,7 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     }),
     EffectsModule.forRoot([AppEffect])
   ],
-  providers: [],
+  providers: [AppEffect],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
