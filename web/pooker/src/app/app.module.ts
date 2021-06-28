@@ -10,7 +10,7 @@ import { AppEffect } from './state/app.effects';
 import { StoreModule } from '@ngrx/store';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent, MenuComponent], 
   imports: [
@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,

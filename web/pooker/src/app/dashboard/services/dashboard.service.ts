@@ -11,8 +11,8 @@ export class DashboardService {
 
   }
 
-  getGames(): Observable<IGame[]> {
-    const url = API_Constants.GET_GAMES;
+  getGames(userGuid: string): Observable<IGame[]> {
+    const url = `${API_Constants.GET_GAMES}/${userGuid}`;
     return this.httpClient.get<IGame[]>(url);
   }
 

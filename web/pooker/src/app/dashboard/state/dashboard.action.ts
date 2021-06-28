@@ -5,7 +5,9 @@ import { IGame } from '../../models/IGame';
 import { IGameRequest } from '../models/IGameRequest';
 
 export const getGames = createAction(
-  '[App Component] Get Game Details');
+  '[App Component] Get Game Details',
+  props<{ userGuid: string }>());
+
 export const setGames = createAction(
   '[App Component] Set Game Details',
   props<{ data: IGame[] }>());

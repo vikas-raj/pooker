@@ -14,8 +14,8 @@ export class DashboardEffect {
   getGames$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DashboardActions.getGames),
-      switchMap(() =>
-        this.dashboardService.getGames().pipe(
+      switchMap((action) =>
+        this.dashboardService.getGames(action.userGuid).pipe(
           map((data) => DashboardActions.setGames({ data: data })),
           //catchError(errors => of(DashboardActions.setErrors({ errors: errors })))
         )

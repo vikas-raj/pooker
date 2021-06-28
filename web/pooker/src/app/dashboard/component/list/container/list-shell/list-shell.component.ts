@@ -16,9 +16,9 @@ export class ListShellComponent implements OnInit {
   games$: Observable<IGame[]> | undefined;
   ngDestroy$ = new Subject();
   constructor(private storeDashboard: Store<fromDashboard.IDashboardState>) { }
-  
+
   ngOnInit(): void {
-    this.storeDashboard.dispatch(DashboardActions.getGames());
+    this.storeDashboard.dispatch(DashboardActions.getGames({ userGuid: "user-guid" }));
 
     this.games$ = this.storeDashboard.pipe(takeUntil(this.ngDestroy$), select(fromDashboard.selectGames))
   }
