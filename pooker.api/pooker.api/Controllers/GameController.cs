@@ -20,7 +20,7 @@ namespace pooker.api.Controllers
             this.queryServiceAsync = queryServiceAsync;
         }
 
-        [HttpGet("GetGameByGuid/{guid}")]
+        [HttpGet("GetGamesByGuid/{guid}")]
         public async Task<IActionResult> GetGameById(string guid)
         {
             var getGameQuery = new GetGameQueryById(guid);
