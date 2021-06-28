@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { GenericForm } from '../../../../../infrastructure/shared-components/dialog/dialog.config';
 import { IGenericFormResponse } from '../../../../../models/IGenericFormResponse';
 
@@ -8,6 +8,8 @@ import { IGenericFormResponse } from '../../../../../models/IGenericFormResponse
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+
+  @Output() registerUser = new EventEmitter<IGenericFormResponse>();
   formGroupInput: GenericForm[] = [
     { name: 'name', placeHolder: 'Enter Name', title: 'Name', type: 'email', validators: [] },
     { name: 'email', placeHolder: 'Enter Email', title: 'Email', type: 'email', validators: [] },
@@ -24,6 +26,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
   onOutputFormResponse($event: IGenericFormResponse) {
-    console.log($event);
+    this.registerUser.emit($event);
   }
 }

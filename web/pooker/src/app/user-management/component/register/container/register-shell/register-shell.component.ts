@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IGenericFormResponse } from '../../../../../models/IGenericFormResponse';
 
 @Component({
   selector: 'app-register-shell',
@@ -11,5 +12,7 @@ export class RegisterShellComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  onRegisterUser($event: IGenericFormResponse) {
+    console.log($event);
+  }
 }

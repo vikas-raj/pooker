@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IGenericFormResponse } from '../../../../../models/IGenericFormResponse';
 
 @Component({
   selector: 'app-login-shell',
@@ -12,4 +13,7 @@ export class LoginShellComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onLoginUser($event: IGenericFormResponse) {
+    console.log($event);
+  }
 }

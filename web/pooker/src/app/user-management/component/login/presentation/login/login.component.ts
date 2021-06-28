@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GenericForm } from '../../../../../infrastructure/shared-components/dialog/dialog.config';
 import { IGenericFormResponse } from '../../../../../models/IGenericFormResponse';
 
@@ -8,6 +8,7 @@ import { IGenericFormResponse } from '../../../../../models/IGenericFormResponse
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @Output() loginUser = new EventEmitter<IGenericFormResponse>();
 
   formGroupInput: GenericForm[] = [
     { name: 'email', placeHolder: 'Enter Email', title: 'Email', type: 'email', validators: [] },
@@ -21,5 +22,6 @@ export class LoginComponent implements OnInit {
   }
   onOutputFormResponse($event: IGenericFormResponse) {
     console.log($event);
+    this.loginUser.emit($event);
   }
 }
