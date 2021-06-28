@@ -8,6 +8,53 @@
                  placeholder="{{formElement.placeHolder}}">
         </div>
       </div>
+      <div *ngSwitchCase="'password'">
+        <div class="form-group ">
+          <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
+          <div>
+            <input [type]="fieldPasswordType ? 'text' : 'password'" class="form-control password-input" formControlName="{{formElement.name}}" id="{{formElement.name}}"
+                   placeholder="{{formElement.placeHolder}}">
+            <i class="fa " [ngClass]="{
+                   'fa-eye-slash': !fieldPasswordType,
+                   'fa-eye': fieldPasswordType
+
+                   }" (click)="fieldPasswordType = !fieldPasswordType;"></i>
+          </div>
+
+        </div>
+      </div>
+      <!--<div *ngSwitchCase="'password'">
+        <div class="form-group form-group-password">
+          <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
+          <div class="asd">
+            <input [type]="fieldPasswordType ? 'text' : 'password'" class="form-control password-input" formControlName="{{formElement.name}}" id="{{formElement.name}}"
+                   placeholder="{{formElement.placeHolder}}">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa " [ngClass]="{
+                   'fa-eye-slash': !fieldPasswordType,
+                   'fa-eye': fieldPasswordType
+
+                   }" (click)="fieldPasswordType = !fieldPasswordType;"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <div *ngSwitchCase="'confirmPassword'">
+        <div class="form-group">
+          <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
+          <input type="password" class="form-control password-input" formControlName="{{formElement.name}}" id="{{formElement.name}}"
+                 placeholder="{{formElement.placeHolder}}">
+        </div>
+      </div>
+      <div *ngSwitchCase="'email'">
+        <div class="form-group">
+          <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
+          <input type="email" email class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
+                 placeholder="{{formElement.placeHolder}}">
+        </div>
+      </div>
       <div *ngSwitchCase="'textArea'">
         <div class="form-group">
           <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
@@ -33,8 +80,6 @@
     <div class="form-group">
       <button class="btn btn-primary" (click)="onSubmit()">Save</button>
       <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
-
     </div>
-
   </div>
 </form>

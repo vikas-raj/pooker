@@ -6,6 +6,7 @@ import { LoginComponent } from './component/login/presentation/login/login.compo
 import { LoginShellComponent } from './component/login/container/login-shell/login-shell.component';
 import { UserManagementComponent } from './component/user-management.component';
 import { UserManagementRoutingModule } from './user-management-routing.module';
+import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { UserManagementRoutingModule } from './user-management-routing.module';
   ],
   imports: [
     CommonModule,
+    InfrastructureModule,
     UserManagementRoutingModule
   ]
 })

@@ -18,7 +18,14 @@
     margin-right: 20px;
 
     &.btn-cancel {
-      border: 1px solid #0d6efd  ;
+      border: 1px solid #0d6efd;
     }
+  }
+
+  i {
+    position: relative;
+    padding: 10px;
+    float: right;
+    bottom: 36px;
   }
 }

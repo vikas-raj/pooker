@@ -10,6 +10,7 @@ import { GenericForm } from '../dialog/dialog.config';
   styleUrls: ['./generic-form.component.scss']
 })
 export class GenericFormComponent implements OnInit {
+  fieldPasswordType = false;
   genericFormGroup: FormGroup = new FormGroup({});
   @Input() formGroupInput: any[] = [];
   @Input() formValues: any = {};
@@ -31,6 +32,9 @@ export class GenericFormComponent implements OnInit {
     }
   }
 
+  equalPassword() {
+
+  }
   onSubmit() {
     const response: IGenericFormResponse = {
       response: this.genericFormGroup.value,

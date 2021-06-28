@@ -19,6 +19,7 @@ export interface GenericForm {
   class?: string;
   validators?: any[];
   options?: IOption[];
+  dependentControl?: string;
 }
 export interface IOption{
   key: string;
