@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule } from "@auth0/angular-jwt";
 
 import { reducers, metaReducers } from './state';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,9 +28,19 @@ import { HttpClientModule } from '@angular/common/http';
         strictActionImmutability: true
       }
     }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        // allowedDomains: ["example.com"],
+        // disallowedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
     EffectsModule.forRoot([AppEffect])
   ],
   providers: [AppEffect],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+export function tokenGetter() {
+  return localStorage.getItem("pooker_token");
+}
