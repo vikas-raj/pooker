@@ -20,6 +20,7 @@ namespace Pooker.ApplicationService.Commands
         public override async Task ExecuteAsync(DBContext dbContext)
         {
             dbContext.User.Add(this.CreateUser());
+            dbContext.SaveChanges();
         }
 
         private User CreateUser()
