@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -6,13 +7,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Pooker.ApplicationService.Configuration;
+using Pooker.DTO;
 using Pooker.Infrastructure.Data.Configuration;
 using Pooker.Infrastructure.Query;
 using Pooker.Infrastructure.Query.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace pooker.api
@@ -32,6 +36,8 @@ namespace pooker.api
             services.AddControllers();
             services.AddDbContext<DBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("PookerConnectionString")));
+            services.Configure<AppSettingsConfig>(this.Configuration.GetSection("AppSettings"));
+
             services.AddTransient<IQueryServiceAsync, QueryServiceAsync>();
             services.AddTransient<ICommandServiceAsync, CommandServiceAsync>();
 
@@ -44,6 +50,19 @@ namespace pooker.api
                     Description = "Sample service for Learner",
                 });
             });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

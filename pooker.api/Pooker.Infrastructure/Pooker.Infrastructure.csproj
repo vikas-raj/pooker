@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pooker.Domain\Pooker.Domain.csproj" />
+    <ProjectReference Include="..\Pooker.DTO\Pooker.DTO.csproj" />
   </ItemGroup>
 
 </Project>

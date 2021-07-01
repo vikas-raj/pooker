@@ -4,12 +4,17 @@ using System.Text;
 
 namespace Pooker.Domain.Domain
 {
-    public class Game : Entity
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    public class Game
     {
         public Game()
         {
             this.UserStoryDetails = new HashSet<UserStoryDetail>();
         }
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
         public string Guid { get; set; }
         public int Velocity { get; set; }
         public string Name { get; set; }

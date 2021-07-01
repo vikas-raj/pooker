@@ -15,7 +15,8 @@ namespace Pooker.Infrastructure.Data.Mapping
             builder.HasOne(d => d.User)
                 .WithMany(a => a.GameBoards)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK_GameBoard_User");
+                .HasConstraintName("FK_GameBoard_User")
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(d => d.UserStoryDetail)
                 .WithMany(a => a.GameBoards)
