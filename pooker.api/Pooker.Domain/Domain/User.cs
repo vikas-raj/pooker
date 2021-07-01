@@ -12,7 +12,8 @@ namespace Pooker.Domain.Domain
             this.Games = new HashSet<Game>();
         }
         public string Username { get; set; }
-        public string Password { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
         public string Email { get; set; }
         public ICollection<GameBoard> GameBoards { get; set; }
         public ICollection<Game> Games { get; set; }
