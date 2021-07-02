@@ -16,8 +16,7 @@ export class AppComponent {
   }
 
   getTokenDetails() {
-    var token = localStorage.getItem('token')
-
+    var token: any = localStorage.getItem('pooker_token')
     const helper = new JwtHelperService();
 
     const decodedToken = helper.decodeToken(token);

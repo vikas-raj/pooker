@@ -16,6 +16,7 @@
         public override async Task ExecuteAsync(DBContext dbContext)
         {
             dbContext.Game.Add(CreateGame());
+            dbContext.SaveChanges();
         }
 
         private Game CreateGame()

@@ -11,12 +11,12 @@ export class UserManagementService {
   constructor(private httpClient: HttpClient) { }
 
   loginUser(loginUserDto: ILoginUserDto): Observable<any> {
-    const url = API_Constants.Register_USER;
+    const url = API_Constants.Login_USER;
     return this.httpClient.post<any>(url, loginUserDto);
   }
 
   registerUser(registerUserDto: IRegisterUserDto): Observable<any> {
-    const url = API_Constants.Login_USER;
+    const url = API_Constants.Register_USER;
     return this.httpClient.post<any>(url, registerUserDto);
   }
 }

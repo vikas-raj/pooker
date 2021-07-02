@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { ILoginUserDto } from '../../../../models/ILoginUserDto';
+import { UserManagementService } from 'src/app/user-management/services/user-management.service';
 
 @Component({
   selector: 'app-login-shell',
@@ -14,13 +15,17 @@ import { ILoginUserDto } from '../../../../models/ILoginUserDto';
 })
 export class LoginShellComponent implements OnInit {
 
-  constructor(private storeDashboard: Store<fromUserManagement.IUserManagementState>) { }
+  constructor(private storeDashboard: Store<fromUserManagement.IUserManagementState>,
+    private userManagementService: UserManagementService) { }
 
   ngOnInit(): void {
   }
 
   onLoginUser($event: IGenericFormResponse) {
     const loginUserDto: ILoginUserDto = { ...$event.response}
-    this.storeDashboard.dispatch(UserManagementActions.loginUser({ loginUserDto: loginUserDto }))
+    this.userManagementService.loginUser(loginUserDto).subscribe((result)=>{
+      console.log(result);
+    });
+    // this.storeDashboard.dispatch(UserManagementActions.loginUser({ loginUserDto: loginUserDto }))
   }
 }

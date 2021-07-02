@@ -7,5 +7,8 @@ export const getUser = createAction(
   props<{ id: number }>());
 
 export const setUser = createAction(
-  '[User Management Component] Set User',
+  '[App Management Component] Set User',
   props<{ userResponse: any }>());
+  export const setShowLoader = createAction(
+    '[App Management Component] Set ShowLoader',
+    props<{ showLoader: boolean }>());

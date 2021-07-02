@@ -7,6 +7,12 @@ import { LoginShellComponent } from './component/login/container/login-shell/log
 import { UserManagementComponent } from './component/user-management.component';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { userManagementReducer } from './state/user-management.reducers';
+import { UserManagementEffect } from './state/user-management.effects';
+import { UserManagementService } from './services/user-management.service';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +25,10 @@ import { InfrastructureModule } from '../infrastructure/infrastructure.module';
   imports: [
     CommonModule,
     InfrastructureModule,
-    UserManagementRoutingModule
-  ]
+    UserManagementRoutingModule,
+    EffectsModule.forFeature([UserManagementEffect]),
+    StoreModule.forFeature('UserManagementState', userManagementReducer)
+  ],
+  providers:[UserManagementEffect, UserManagementService]
 })
 export class UserManagementModule { }

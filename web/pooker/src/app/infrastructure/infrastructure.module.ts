@@ -5,12 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogComponent } from './shared-components/dialog/dialog.component';
 import { DialogTemplateComponent } from './shared-components/dialog/dialog-template/dialog-template.component';
 import { GenericFormComponent } from './shared-components/generic-form/generic-form.component';
+import { PookerLoaderComponent } from './shared-components/pooker-loader/pooker-loader.component';
 
 @NgModule({
   declarations: [
     DialogComponent,
     DialogTemplateComponent,
-    GenericFormComponent
+    GenericFormComponent,
+    PookerLoaderComponent
   ],
   imports: [
     CommonModule,

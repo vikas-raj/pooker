@@ -7,8 +7,14 @@ import { appReducer } from './app.reducer';
 export interface IAppState {
   error?: string,
   user?: IUser,
+  showLoader?: boolean,
 }
+export const getAppState = (state: any)=> state.app;
 
+export const selectShowLoader= createSelector(
+  getAppState,
+  state => state?.showLoader
+)
 export const reducers: ActionReducerMap<any> = {
   app: appReducer,
 };
