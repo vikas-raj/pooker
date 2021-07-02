@@ -40,7 +40,16 @@ namespace pooker.api
 
             services.AddTransient<IQueryServiceAsync, QueryServiceAsync>();
             services.AddTransient<ICommandServiceAsync, CommandServiceAsync>();
-
+            services.AddCors(options => {
+                options.AddPolicy(
+                    "PookerCorsPolicy",
+                    builder => {
+                        builder.WithOrigins(this.Configuration.GetSection($"PookerCorsPolicy:Origins").Get<string[]>())
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                    });
+            });
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -74,7 +83,7 @@ namespace pooker.api
             }
 
             app.UseRouting();
-
+            app.UseCors("PookerCorsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -23,7 +23,8 @@ import { PookerLoaderComponent } from './shared-components/pooker-loader/pooker-
   exports: [
     CommonModule,
     MaterialModule, GenericFormComponent,
-    DialogComponent, DialogTemplateComponent
+    DialogComponent, DialogTemplateComponent,
+    PookerLoaderComponent
   ],
   entryComponents: [DialogTemplateComponent]
 })
