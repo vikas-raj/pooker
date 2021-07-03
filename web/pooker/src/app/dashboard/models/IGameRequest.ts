@@ -6,4 +6,5 @@ export interface IGameRequest {
   showVelocityToUser?: boolean;
   isAutoFlip?: boolean;
   allowUserToChangeVote?: boolean;
+  userId?: number;
 }

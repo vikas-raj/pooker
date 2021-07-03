@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { IGameRequest } from 'src/app/dashboard/models/IGameRequest';
 import { GenericForm } from 'src/app/infrastructure/shared-components/dialog/dialog.config';
 import { IGenericFormResponse } from '../../../../models/IGenericFormResponse';
 
@@ -8,7 +9,7 @@ import { IGenericFormResponse } from '../../../../models/IGenericFormResponse';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-
+  @Output() createGame = new EventEmitter<IGenericFormResponse>();
   constructor() { }
   formGroupInput: GenericForm[] = [
     { name: 'game', placeHolder: 'Add Game Name', title: 'Name', type: 'textBox', validators: [] },
@@ -16,7 +17,7 @@ export class CreateComponent implements OnInit {
     { name: 'velocity', placeHolder: 'Add velocity', title: 'Velocity', type: 'textBox', validators: [] },
     {
       name: 'meInGame', placeHolder: 'Add text', title: 'Add me in game', type: 'radio', validators: [],
-      options: [{ value: true, key: 'Yes', id: 'meInGame1' }, { value: false, key: 'No', id: 'meInGame2'}]
+      options: [{ value: true, key: 'Yes', id: 'meInGame1' }, { value: false, key: 'No', id: 'meInGame2' }]
     },
     {
       name: 'showVelocityToUser', placeHolder: 'Add text', title: 'Show Velocity To User', type: 'radio', validators: [],
@@ -28,14 +29,14 @@ export class CreateComponent implements OnInit {
     },
     {
       name: 'allowUserToChangeVote', placeHolder: 'Add text', title: 'Allow User To Change Vote', type: 'radio', validators: [],
-      options: [{ value: true, key: 'Yes', id: 'allowUserToChangeVote1' }, { value: false, key: 'No', id: 'allowUserToChangeVote2'}]
+      options: [{ value: true, key: 'Yes', id: 'allowUserToChangeVote1' }, { value: false, key: 'No', id: 'allowUserToChangeVote2' }]
     }
   ];
 
-  formValues: any;
+  formValues?: IGameRequest;
   ngOnInit(): void {
   }
   onOutputFormResponse($event: IGenericFormResponse) {
-    console.log($event);
+    this.createGame.emit($event);
   }
 }

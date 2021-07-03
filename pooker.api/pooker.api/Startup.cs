@@ -40,6 +40,15 @@ namespace pooker.api
 
             services.AddTransient<IQueryServiceAsync, QueryServiceAsync>();
             services.AddTransient<ICommandServiceAsync, CommandServiceAsync>();
+
+            services.AddControllers(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+            })
+            .AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddCors(options => {
                 options.AddPolicy(
                     "PookerCorsPolicy",
@@ -61,17 +70,34 @@ namespace pooker.api
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+                .AddJwtBearer(o =>
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
+                    o.TokenValidationParameters = new TokenValidationParameters
                     {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
+                        ValidateLifetime = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(options =>
+            //    {
+            //        options.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuer = true,
+            //            ValidateAudience = true,
+            //            ValidateLifetime = true,
+            //            ValidateIssuerSigningKey = true,
+            //            ValidIssuer = Configuration.GetSection("AppSettings:Issuer").Value,
+            //            ValidAudience = Configuration.GetSection("AppSettings:Issuer").Value,
+            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+            //                .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+            //        };
+            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,8 +110,8 @@ namespace pooker.api
 
             app.UseRouting();
             app.UseCors("PookerCorsPolicy");
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

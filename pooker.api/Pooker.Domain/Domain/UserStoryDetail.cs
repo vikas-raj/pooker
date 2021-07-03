@@ -19,6 +19,6 @@ namespace Pooker.Domain.Domain
         public string StoryName { get; set; }
         public int GameId { get; set; }
         public virtual Game Game { get; set; }
-        public ICollection<GameBoard> GameBoards { get; set; }
+        public virtual ICollection<GameBoard> GameBoards { get; set; }
     }
 }

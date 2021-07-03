@@ -5,7 +5,10 @@ import { IGame } from '../../models/IGame';
 import { IGameRequest } from '../models/IGameRequest';
 
 export const getGames = createAction(
-  '[App Component] Get Game Details',
+  '[App Component] Get Game Details');
+
+  export const getGameById = createAction(
+  '[App Component] Get Game Detail bi Id',
   props<{ userGuid: string }>());
 
 export const setGames = createAction(

@@ -3,7 +3,8 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpHeaders
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -20,10 +21,16 @@ export class LoaderInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.store.dispatch(appActions.setShowLoader({ showLoader: true }))
     this.initialValue = this.initialValue + 1;
+    request = request.clone({
+      headers: new HttpHeaders({
+        'content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('pooker_token')
+      })
+    });
     return next.handle(request).pipe(
-      finalize(() =>{
-        this.finalValue = this.finalValue +1;
-        if(this.finalValue === this.initialValue){
+      finalize(() => {
+        this.finalValue = this.finalValue + 1;
+        if (this.finalValue === this.initialValue) {
           this.store.dispatch(appActions.setShowLoader({ showLoader: false }))
         }
       })

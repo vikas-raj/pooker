@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { IGame } from "../../models/IGame";
 import { IGameRequest } from "../models/IGameRequest";
@@ -8,11 +8,15 @@ import { API_Constants } from "../../infrastructure/constants/api-constants";
 @Injectable()
 export class DashboardService {
   constructor(private httpClient: HttpClient) {
-
   }
 
-  getGames(userGuid: string): Observable<IGame[]> {
-    const url = `${API_Constants.GET_GAMES}/${userGuid}`;
+  getGames(): Observable<any> {
+    const url = `${API_Constants.GET_GAMES_By_USER}`;
+    return this.httpClient.get<IGame[]>(url);
+  }
+
+  getGameById(userGuid: string): Observable<any> {
+    const url = `${API_Constants.GET_GAME_By_ID}/${userGuid}`;
     return this.httpClient.get<IGame[]>(url);
   }
 

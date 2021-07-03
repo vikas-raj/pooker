@@ -25,7 +25,9 @@ export class LoginShellComponent implements OnInit {
     const loginUserDto: ILoginUserDto = { ...$event.response}
     this.userManagementService.loginUser(loginUserDto).subscribe((result)=>{
       console.log(result);
+      localStorage.setItem('pooker_token', result?.tokenString);
     });
     // this.storeDashboard.dispatch(UserManagementActions.loginUser({ loginUserDto: loginUserDto }))
   }
+  
 }

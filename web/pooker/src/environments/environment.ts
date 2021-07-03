@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  POOKER_URL: 'http://localhost:59962/api/'
+  POOKER_URL: 'http://localhost:5000/api/'
 };
 
 /*

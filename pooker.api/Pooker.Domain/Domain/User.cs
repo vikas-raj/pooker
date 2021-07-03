@@ -19,8 +19,8 @@ namespace Pooker.Domain.Domain
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Email { get; set; }
-        public ICollection<GameBoard> GameBoards { get; set; }
-        public ICollection<Game> Games { get; set; }
+        public virtual ICollection<GameBoard> GameBoards { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
 
     }
 }

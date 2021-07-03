@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Pooker.ApplicationService.Commands;
@@ -24,12 +25,16 @@ namespace pooker.api.Controllers
         private readonly AppSettingsConfig appSettingsConfig;
         private ICommandServiceAsync commandServiceAsync = null;
         private IQueryServiceAsync queryServiceAsync = null;
+        private IConfiguration configuration;
 
-        public AuthController(IQueryServiceAsync queryServiceAsync, ICommandServiceAsync commandServiceAsync, IOptions<AppSettingsConfig> options)
+        public AuthController(IQueryServiceAsync queryServiceAsync, ICommandServiceAsync commandServiceAsync,
+            IOptions<AppSettingsConfig> options, IConfiguration _configuration)
         {
             appSettingsConfig = options.Value;
             this.commandServiceAsync = commandServiceAsync;
             this.queryServiceAsync = queryServiceAsync;
+            configuration = _configuration;
+
         }
         [HttpPost("RegisterUser")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto req)
@@ -56,25 +61,25 @@ namespace pooker.api.Controllers
                 return this.Ok("Wrong Email and Password");
             }
 
-            // generate token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(appSettingsConfig.Token);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    //AddClaim(userFromRepo.UserRole)
-                }),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha512Signature)
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new[] {
+                    new Claim("Name",user.Username),
+                    new Claim("Email",user.Email),
+                    new Claim("userId",user.ID.ToString()),
+                    //new Claim("userType",((UserType)user.UserType).ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
-            return Ok(new { tokenString });
+
+            var token = new JwtSecurityToken(
+                       issuer: configuration["Jwt:Issuer"],
+                       audience: configuration["Jwt:Issuer"],
+                       claims: claims, expires: DateTime.Now.AddHours(1),
+                       signingCredentials: credentials
+                        );
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return this.Ok(new { tokenString });
         }
     }
 }
