@@ -66,7 +66,7 @@ namespace pooker.api.Controllers
             var claims = new[] {
                     new Claim("Name",user.Username),
                     new Claim("Email",user.Email),
-                    new Claim("userId",user.ID.ToString()),
+                    new Claim("userId",user.Id.ToString()),
                     //new Claim("userType",((UserType)user.UserType).ToString()),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
             };

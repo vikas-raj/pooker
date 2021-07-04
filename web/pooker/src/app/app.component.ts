@@ -17,12 +17,17 @@ export class AppComponent {
 
   getTokenDetails() {
     var token: any = localStorage.getItem('pooker_token')
+    
+    if(!token){
+      return;
+    }
     const helper = new JwtHelperService();
 
     const decodedToken = helper.decodeToken(token);
 
     // Other functions
     const expirationDate = helper.getTokenExpirationDate(token);
+    debugger;
     const isExpired = helper.isTokenExpired(token);
     if (!isExpired) {
       var user = <IUser>{};
@@ -33,7 +38,7 @@ export class AppComponent {
       user.id = +decodedToken.userId;
       // this.service.userSubject.next(user);
     } else {
-      // this.service.loggedOut();
+      localStorage.removeItem('pooker_token')
     }
   }
 }

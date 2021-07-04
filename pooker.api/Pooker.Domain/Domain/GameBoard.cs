@@ -2,11 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    public class GameBoard
+    public class GameBoard : Entity
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
         public int storyPoint { get; set; }
         public int UserStoryDetailId { get; set; }
         public int UserId { get; set; }

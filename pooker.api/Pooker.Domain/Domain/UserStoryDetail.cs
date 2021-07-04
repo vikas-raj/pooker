@@ -6,15 +6,12 @@ using System.Text;
 
 namespace Pooker.Domain.Domain
 {
-    public class UserStoryDetail
+    public class UserStoryDetail : Entity
     {
         public UserStoryDetail()
         {
             this.GameBoards = new HashSet<GameBoard>();
         }
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
         public int StoryPoint { get; set; }
         public string StoryName { get; set; }
         public int GameId { get; set; }
