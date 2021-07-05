@@ -12,9 +12,11 @@ namespace Pooker.Domain.Domain
         {
             this.GameBoards = new HashSet<GameBoard>();
         }
-        public int StoryPoint { get; set; }
+        public int? StoryPoint { get; set; }
         public string StoryName { get; set; }
         public int GameId { get; set; }
+        public bool IsCurrentUserStory { get; set; }
+        public bool IsUserStoryActive { get; set; }
         public virtual Game Game { get; set; }
         public virtual ICollection<GameBoard> GameBoards { get; set; }
     }

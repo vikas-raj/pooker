@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pooker.ApplicationService.Commands
+﻿namespace Pooker.ApplicationService.Commands
 {
     using Pooker.ApplicationService.Configuration;
     using Pooker.Domain.Domain;

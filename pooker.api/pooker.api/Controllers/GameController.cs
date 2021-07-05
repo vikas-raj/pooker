@@ -33,7 +33,10 @@ namespace pooker.api.Controllers
             var email = identity.Claims.FirstOrDefault(x => x.Type == "Email").Value;
             var name = identity.Claims.FirstOrDefault(x => x.Type == "Name").Value;
             var userId = Convert.ToInt32(identity.Claims.FirstOrDefault(x => x.Type == "userId").Value);
-            
+
+            var insertUpdateGameCommand = new AddUserToGameCommand(guid, userId);
+            await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
+
             var getGameQuery = new GetGameQueryById(guid);
             var res = await this.queryServiceAsync.ExecuteAsync(getGameQuery);
             return this.Ok(res);
