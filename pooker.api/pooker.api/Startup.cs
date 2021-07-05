@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Pooker.api.SignalR;
 using Pooker.ApplicationService.Configuration;
 using Pooker.DTO;
 using Pooker.Infrastructure.Data.Configuration;
@@ -18,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace pooker.api
 {
@@ -34,6 +36,9 @@ namespace pooker.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //services.AddSignalR();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddDbContext<DBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("PookerConnectionString")));
             services.Configure<AppSettingsConfig>(this.Configuration.GetSection("AppSettings"));
@@ -49,10 +54,12 @@ namespace pooker.api
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
                 options.AddPolicy(
                     "PookerCorsPolicy",
-                    builder => {
+                    builder =>
+                    {
                         builder.WithOrigins(this.Configuration.GetSection($"PookerCorsPolicy:Origins").Get<string[]>())
                         .AllowAnyHeader()
                         .AllowAnyMethod()
@@ -98,6 +105,7 @@ namespace pooker.api
             //                .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
             //        };
             //    });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,6 +118,12 @@ namespace pooker.api
 
             app.UseRouting();
             app.UseCors("PookerCorsPolicy");
+
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<BroadCastHub>("/notify");
+            //});
+
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
@@ -117,10 +131,11 @@ namespace pooker.api
                 endpoints.MapControllers();
             });
             app.UseSwagger();
-            app.UseSwaggerUI(options => {
+            app.UseSwaggerUI(options =>
+            {
                 options.SwaggerEndpoint("./swagger/v2/swagger.json", "PlaceInfo Services");
                 options.RoutePrefix = string.Empty;
-               });
+            });
 
         }
     }

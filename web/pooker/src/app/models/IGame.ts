@@ -1,3 +1,4 @@
+import { IGameUserXREF } from "./IGameUserXREF";
 import { IUser } from "./Iuser";
 import { IUserStoryDetail } from "./IUserStoryDetail";
 
@@ -13,5 +14,6 @@ export interface IGame {
   allowUserToChangeVote?: boolean;
   user?: IUser;
   createdDate?: Date;
+  gameUserXREFs?: IGameUserXREF[]
   userStoryDetails?: IUserStoryDetail[]
 }

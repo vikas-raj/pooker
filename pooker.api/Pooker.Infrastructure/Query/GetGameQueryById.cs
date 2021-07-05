@@ -19,6 +19,7 @@
         {
             return dbContext.Game.AsNoTracking()
                             .Include(x => x.GameUserXREFs)
+                            .ThenInclude(a => a.User)
                             .Include(x => x.UserStoryDetails)
                             .ThenInclude(x => x.GameBoards)
                             .FirstOrDefault(x => x.Guid == this.GameGuid);

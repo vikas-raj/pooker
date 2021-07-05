@@ -21,7 +21,7 @@
             </div>
             <div class="all-players-cards-selected">
               <div class="scroll-container flex">
-                <app-play-area></app-play-area>
+                <app-play-area [game]="game$ | async"></app-play-area>
               </div>
             </div>
             <div class="players-cards-container">

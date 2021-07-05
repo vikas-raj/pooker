@@ -9,7 +9,8 @@
     {
         private readonly int UserId;
         private readonly string GameGuid;
-        
+        public bool IsUserAdded { get; set; }
+
         public AddUserToGameCommand(string guid, int userId)
         {
             this.GameGuid = guid;
@@ -22,11 +23,12 @@
             var gameUserXref = dbContext.GameUserXREF.
                 FirstOrDefault(x => x.GameId == gameId &&
                 x.UserId == this.UserId);
-
+            this.IsUserAdded = false;
             if (gameUserXref == null)
             {
                 dbContext.GameUserXREF.Add(this.CreateGameUserXref(gameId));
                 dbContext.SaveChanges();
+                this.IsUserAdded = true;
             }
         }
 

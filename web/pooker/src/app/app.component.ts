@@ -17,7 +17,7 @@ export class AppComponent {
 
   getTokenDetails() {
     var token: any = localStorage.getItem('pooker_token')
-    
+     
     if(!token){
       return;
     }
@@ -34,7 +34,7 @@ export class AppComponent {
       // var userType = EmployeeType;
       // user.role = +userType[decodedToken.userType]; //EmployeeType.Mother. decodedToken.userType;
       user.token = token;
-      user.userName = decodedToken.sub;
+      user.username = decodedToken.sub;
       user.id = +decodedToken.userId;
       // this.service.userSubject.next(user);
     } else {
