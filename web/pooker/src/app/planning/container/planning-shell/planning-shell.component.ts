@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DialogConfig, DialogResponse } from '../../../infrastructure/shared-components/dialog/dialog.config';
 
 @Component({
@@ -7,16 +8,17 @@ import { DialogConfig, DialogResponse } from '../../../infrastructure/shared-com
   styleUrls: ['./planning-shell.component.scss']
 })
 export class PlanningShellComponent implements OnInit {
-opened: boolean=false;
-  constructor() { }
+  opened: boolean = false;
+  gameGuid: string = '';
+  constructor(private route: ActivatedRoute) { }
   showAddNewUserStory = false;
   dialogConfig: DialogConfig = {
     title: "Hello",
-    dialogForm: [{ name: 'Test', placeHolder: 'Add text', title: 'Test', type: 'textArea', validators: [] },
-    { name: 'Radio', placeHolder: 'Add text', title: 'Select Any option', type: 'radio', validators: [],
-     options: [{key:'radio1', value: 'Radio 1' },{key:'radio2', value: 'Radio 2' }] }]
+    dialogForm: [{ name: 'userStory', placeHolder: 'Add User Story', title: 'User Story Name', type: 'textArea', validators: [] },
+    ]
   }
   ngOnInit(): void {
+    this.gameGuid = this.route.snapshot.params.id;
   }
   onAddNewUserStory($event: boolean) {
     this.showAddNewUserStory = $event;
@@ -25,6 +27,6 @@ opened: boolean=false;
   dialogResponse($event: DialogResponse) {
     this.showAddNewUserStory = false;
     console.log($event);
-
+    debugger;
   }
 }
