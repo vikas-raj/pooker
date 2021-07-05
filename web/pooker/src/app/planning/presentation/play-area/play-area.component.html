@@ -1,22 +1,24 @@
-<div class="play-area" *ngFor="let userViewModel of playAreaViewModel" >
-  <div class="dummy-score-card" *ngIf="!userViewModel.isCardSelected">
-    <div style="display: table-cell; vertical-align: middle; text-align: center">
-      <i class="fa fa-product-hunt"></i>
+<div class="play-area">
+  <div *ngFor="let userViewModel of playAreaViewModel">
+    <div class="dummy-score-card" *ngIf="!userViewModel.isCardSelected">
+      <div style="display: table-cell; vertical-align: middle; text-align: center">
+        <i class="fa fa-product-hunt"></i>
+      </div>
     </div>
-  </div>
-  <div class="dummy-score-card-selected" *ngIf="userViewModel.isCardSelected">
-    <div style="display: table-cell; vertical-align: middle; text-align: center">
-      <i class="fa fa-product-hunt"></i>
+    <div class="dummy-score-card-selected" *ngIf="userViewModel.isCardSelected">
+      <div style="display: table-cell; vertical-align: middle; text-align: center">
+        <i class="fa fa-product-hunt"></i>
+      </div>
     </div>
-  </div>
-  <div class="score-card-number" *ngIf="userViewModel.isCardsFlip">
-    <div style="display: table-cell; vertical-align: middle;">
-      {{userViewModel.value}}
+    <div class="score-card-number" *ngIf="userViewModel.isCardsFlip">
+      <div style="display: table-cell; vertical-align: middle;">
+        {{userViewModel.value}}
+      </div>
     </div>
-  </div>
-  <div class="user-name">
-    <div style="display: table-cell; vertical-align: middle;">
-      {{userViewModel.name}}
+    <div class="user-name">
+      <div style="display: table-cell; vertical-align: middle;">
+        {{userViewModel.name}}
+      </div>
     </div>
   </div>
 </div>

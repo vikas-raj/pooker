@@ -52,7 +52,7 @@ namespace pooker.api.Controllers
 
             if (insertUpdateGameCommand.IsUserAdded)
             {
-                await this.hubContext.Clients.All.BroadcastMessage();
+                //await this.hubContext.Clients.All.BroadcastMessage();
             }
 
             var getGameQuery = new GetGameQueryById(guid);

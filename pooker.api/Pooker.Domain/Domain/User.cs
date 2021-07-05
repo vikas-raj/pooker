@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Pooker.Domain.Domain
 {
     public class User : Entity
-    {
+    { 
         public User()
         {
             this.GameBoards = new HashSet<GameBoard>();
