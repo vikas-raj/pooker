@@ -21,6 +21,8 @@
       <td>{{totalUsers(game?.userStoryDetails)}}</td>
       <td>{{game.createdDate | date: 'short'}}</td>
       <td class="fa-icon-operation">
+        <i class="fa fa-play" aria-hidden="true" (click)="onPlay(game.guid)"></i>
+
         <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(game.id)"></i>
         <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEdit(game.id)"></i>
 

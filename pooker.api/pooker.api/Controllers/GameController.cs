@@ -25,7 +25,7 @@ namespace pooker.api.Controllers
             this.queryServiceAsync = queryServiceAsync;
         }
 
-        [HttpGet("GetGamesByGuid/{guid}")]
+        [HttpGet("GetGameByGuid/{guid}")]
         public async Task<IActionResult> GetGameById(string guid)
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

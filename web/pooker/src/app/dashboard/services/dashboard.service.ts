@@ -15,11 +15,6 @@ export class DashboardService {
     return this.httpClient.get<IGame[]>(url);
   }
 
-  getGameById(userGuid: string): Observable<any> {
-    const url = `${API_Constants.GET_GAME_By_ID}/${userGuid}`;
-    return this.httpClient.get<IGame[]>(url);
-  }
-
   saveGame(gameRequest: IGameRequest): Observable<any> {
     const url = API_Constants.SAVE_GAME;
     return this.httpClient.post<any>(url, gameRequest);
