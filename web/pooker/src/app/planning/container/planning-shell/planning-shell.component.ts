@@ -7,6 +7,7 @@ import { select, Store } from '@ngrx/store';
 import { IGame } from 'src/app/models/IGame';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { IUserStoryRequest } from '../../models/IUserStoryRequest';
 @Component({
   selector: 'app-planning-shell',
   templateUrl: './planning-shell.component.html',
@@ -23,7 +24,7 @@ export class PlanningShellComponent implements OnInit {
   showAddNewUserStory = false;
   dialogConfig: DialogConfig = {
     title: "Add User Story",
-    dialogForm: [{ name: 'userStory', placeHolder: 'Add User Story', title: 'User Story Name', type: 'textArea', validators: [] },
+    dialogForm: [{ name: 'storyName', placeHolder: 'Add User Story', title: 'User Story Name', type: 'textArea', validators: [] },
     ]
   };
 
@@ -38,8 +39,15 @@ export class PlanningShellComponent implements OnInit {
   }
 
   dialogResponse($event: DialogResponse) {
+    const userStoryRequest: IUserStoryRequest = {
+      gameId: 1,
+      isUserStoryActive: true,
+      storyName:$event.formValues.storyName,
+    };
+
     this.showAddNewUserStory = false;
+    this.storePlanning.dispatch(PlanningActions.insertUpdateUserStory({ data: userStoryRequest }))
+
     console.log($event);
-    debugger;
   }
 }

@@ -11,9 +11,9 @@
     <div class="user-story-point"> Point</div>
   </div>
   <div class="user-story-list">
-    <app-user-story-list></app-user-story-list>
+    <app-user-story-list [userStories]="game?.userStoryDetails"></app-user-story-list>
   </div>
   <div class="operation">
-    <app-operation (addNewUserStory)="onAddNewUserStory($event)"></app-operation>
+    <app-operation *ngIf="checkGameOwner()" (addNewUserStory)="onAddNewUserStory($event)"></app-operation>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" [(opened)]="opened">
     <div class="game-sidebar">
-      <app-story-board (addNewUserStory)="onAddNewUserStory($event)"></app-story-board>
+      <app-story-board [game]="game$ | async" (addNewUserStory)="onAddNewUserStory($event)"></app-story-board>
     </div>
   </mat-sidenav>
 

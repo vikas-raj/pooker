@@ -6,4 +6,5 @@ export const API_Constants = {
   SAVE_GAME: environment.POOKER_URL + 'Game/CreateGame',
   Register_USER: environment.POOKER_URL + 'Auth/RegisterUser',
   Login_USER: environment.POOKER_URL + 'Auth/LoginUser',
+  Insert_Update_UserStory: environment.POOKER_URL + 'Planning/InsertUpdateUserStory',
 }

@@ -23,7 +23,7 @@
                 item.IsUserStoryActive = false;
                 item.IsCurrentUserStory = false;
             }
-            var userStoryDetail = dbContext.UserStoryDetail.FirstOrDefault(x => x.Id == this.userStoryDto.Id.Value);
+            var userStoryDetail = dbContext.UserStoryDetail.FirstOrDefault(x => x.Id == this.userStoryDto.Id);
             if (userStoryDetail == null)
             {
                 userStoryDetail = this.CreateUserStoryDetail();

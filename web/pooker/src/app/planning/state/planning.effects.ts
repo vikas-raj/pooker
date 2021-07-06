@@ -22,4 +22,15 @@ export class PlanningEffect {
       )
     )
   );
+  insertUpdateUserStoryDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PlanningActions.insertUpdateUserStory),
+      switchMap((action) =>
+        this.planningService.insertUpdateUserStoryDetail(action.data).pipe(
+          map((data) => PlanningActions.setGame({ data: data })),
+          //catchError(errors => of(DashboardActions.setErrors({ errors: errors })))
+        )
+      )
+    )
+  );
 }

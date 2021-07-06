@@ -18,6 +18,7 @@
         public override async Task<Game> ExecuteAsync(DBContext dbContext)
         {
             return dbContext.Game.AsNoTracking()
+                            .Include(x => x.User)
                             .Include(x => x.GameUserXREFs)
                             .ThenInclude(a => a.User)
                             .Include(x => x.UserStoryDetails)

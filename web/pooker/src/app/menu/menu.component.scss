@@ -1,0 +1,20 @@
+
+
+.dropdown-user{
+    .fa-user-circle-o:before{
+        font-size: 40px;
+    }
+    .dropdown-toggle:empty::after{
+        display: none;
+    }
+    .dropdown-menu{
+        right: 0px;
+        left: unset;
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            padding-left: 10px;
+        }
+    }
+    
+}
