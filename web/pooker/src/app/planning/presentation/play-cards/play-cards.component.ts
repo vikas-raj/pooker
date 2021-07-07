@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { NullTemplateVisitor } from '@angular/compiler';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { IGameBoardDto } from '../../models/IGameBoardDto';
 
 @Component({
   selector: 'app-play-cards',
@@ -8,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class PlayCardsComponent implements OnInit {
   initialLeftValue = 2;
   selectedIndex?: number = undefined;
+  @Input() activeUserStoryId: number = 0;
+  @Output() selectPoint = new EventEmitter<IGameBoardDto>();
   constructor() { }
 
   ngOnInit(): void {
@@ -17,7 +21,12 @@ export class PlayCardsComponent implements OnInit {
     this.initialLeftValue = i == 0 ? 2 : this.initialLeftValue + 7.3;
     return i == 0 ? 2 : this.initialLeftValue;
   }
-  onClick(index: number) {
+  onClick(card: number | string, index: number) {
+    const gameBoardDto: IGameBoardDto = {
+      storyId: this.activeUserStoryId,
+      storyPoint: isNaN(+card) ? +card : undefined
+    };
+    this.selectPoint.emit(gameBoardDto);
     this.selectedIndex = index;
   }
 }

@@ -31,7 +31,6 @@ namespace Pooker.ApplicationService.Commands
             }
             else
             {
-                gameBoard.UserId = this.userGameBoardDto.UserId;
                 gameBoard.StoryPoint = this.userGameBoardDto.StoryPoint;
             }
 

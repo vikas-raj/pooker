@@ -33,4 +33,16 @@ export class PlanningEffect {
       )
     )
   );
+  
+  selectStoryPoint$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(PlanningActions.selectStoryPointOnGameBoard),
+    switchMap((action) =>
+      this.planningService.insertUpdateUserStoryDetail(action.point).pipe(
+        map((data) => PlanningActions.setGame({ data: data })),
+        //catchError(errors => of(DashboardActions.setErrors({ errors: errors })))
+      )
+    )
+  )
+);
 }

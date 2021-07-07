@@ -2,19 +2,19 @@
   <div class="user-story-list-body">
     <div class="user-story" *ngFor="let userStory of userStories; let i = index" [ngClass]="{'bg-light': i%2 == 0}">
       <div class="user-story-name">
-        {{userStory.storyName}}
+        {{i + 1}}. {{userStory.storyName}}
       </div>
       <div class="user-story-point">
         {{userStory.storyPoint}}
       </div>
     </div>
-    <div class="user-story" *ngFor="let X of [1,2,3,4,5,6,7,8,9,10]; let i = index" [ngClass]="{'bg-light': i%2 == 0}">
+    <!-- <div class="user-story" *ngFor="let X of [1,2,3,4,5,6,7,8,9,10]; let i = index" [ngClass]="{'bg-light': i%2 == 0}">
       <div class="user-story-name">
         {{X}}. Hello Use Story Name {{X}}
       </div>
       <div class="user-story-point">
         {{X}}
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

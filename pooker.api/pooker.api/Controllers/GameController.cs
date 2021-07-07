@@ -28,13 +28,13 @@ namespace pooker.api.Controllers
 
         private readonly IHubContext<BroadCastHub, IHubClient> hubContext;
         public GameController(IQueryServiceAsync queryServiceAsync, ICommandServiceAsync commandServiceAsync,
-            //IHubContext<BroadCastHub,IHubClient> hubContext,
+            IHubContext<BroadCastHub, IHubClient> hubContext,
             IMapper mapper
             )
         {
             this.commandServiceAsync = commandServiceAsync;
             this.queryServiceAsync = queryServiceAsync;
-            //this.hubContext = hubContext;
+            this.hubContext = hubContext;
             this.mapper = mapper;
         }
 

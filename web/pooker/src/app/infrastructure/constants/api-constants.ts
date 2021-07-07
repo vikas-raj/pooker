@@ -7,4 +7,5 @@ export const API_Constants = {
   Register_USER: environment.POOKER_URL + 'Auth/RegisterUser',
   Login_USER: environment.POOKER_URL + 'Auth/LoginUser',
   Insert_Update_UserStory: environment.POOKER_URL + 'Planning/InsertUpdateUserStory',
+  INSERT_UPDATE_GAME_BOARD: environment.POOKER_URL + 'Planning/InsertUpdateGameBoard',
 }

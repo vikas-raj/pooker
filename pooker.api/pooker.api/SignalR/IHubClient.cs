@@ -7,6 +7,6 @@ namespace Pooker.api.SignalR
     using System.Threading.Tasks;
     public interface IHubClient
     {
-        Task BroadcastMessage();
+        Task BroadcastMessage(int gameId);
     }
 }

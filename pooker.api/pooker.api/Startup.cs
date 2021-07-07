@@ -36,7 +36,7 @@ namespace pooker.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddSignalR();
+            services.AddSignalR();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddDbContext<DBContext>(options =>
@@ -128,6 +128,7 @@ namespace pooker.api
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<BroadCastHub>("/notify");
                 endpoints.MapControllers();
             });
             app.UseSwagger();
