@@ -76,7 +76,7 @@ export class PlanningShellComponent implements OnInit {
 
     connection.on("BroadcastMessage", (gameId) => {
       if (gameId == this.game?.id) {
-        this.storePlanning.dispatch(PlanningActions.getGameById({ userGuid: this.gameGuid }))
+        this.storePlanning.dispatch(PlanningActions.getPlanningGameById({ userGuid: this.gameGuid }))
       }
     });
   }

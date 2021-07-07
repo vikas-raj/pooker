@@ -10,6 +10,7 @@
         private readonly int UserId;
         private readonly string GameGuid;
         public bool IsUserAdded { get; set; }
+        public int GameId { get; set; }
 
         public AddUserToGameCommand(string guid, int userId)
         {
@@ -27,8 +28,9 @@
             if (gameUserXref == null)
             {
                 dbContext.GameUserXREF.Add(this.CreateGameUserXref(gameId));
-                dbContext.SaveChanges();
+                dbContext.SaveChangesAsync();
                 this.IsUserAdded = true;
+                this.GameId = gameId;
             }
         }
 

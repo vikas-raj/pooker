@@ -21,6 +21,15 @@ export class PlanningService {
     );
   }
 
+  getPlanningGameById(userGuid: string): Observable<IGame> {
+    const url = `${API_Constants.GET_PLANNING_GAME_By_ID}/${userGuid}`;
+    return this.httpClient.get<IGame>(url).pipe(
+      tap(x => {
+        console.log(x);
+      })
+    );
+  }
+  
   insertUpdateUserStoryDetail(userStoryRequest: IUserStoryRequest): Observable<IGame> {
     const url = `${API_Constants.Insert_Update_UserStory}`;
     return this.httpClient.post<IGame>(url, userStoryRequest);

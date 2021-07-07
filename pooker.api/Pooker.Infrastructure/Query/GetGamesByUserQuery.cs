@@ -18,10 +18,19 @@ namespace Pooker.Infrastructure.Query
         }
         public override async Task<IEnumerable<Game>> ExecuteAsync(DBContext dbContext)
         {
-            return await dbContext.Game.AsNoTracking()
-                            .Include(x => x.UserStoryDetails)
-                            .ThenInclude(x => x.GameBoards)
-                            .Where(x => x.UserId == this.UserId).ToListAsync();
+            return await dbContext.GameUserXREF.AsNoTracking()
+                           .Include(x => x.Game)
+                           .ThenInclude(x => x.UserStoryDetails)
+                           .ThenInclude(x => x.GameBoards)
+                           .Include(x => x.User)
+                            .Where(x => x.UserId == this.UserId && !x.Game.IsDeleted).Select(a => new Game() { 
+                                Name = a.Game.Name,
+                                Velocity = a.Game.Velocity,
+                                UserStoryDetails = a.Game.UserStoryDetails,
+                                CreatedOn = a.Game.CreatedOn,
+                                Description = a.Game.Description,
+                                Guid = a.Game.Guid,
+                            }).ToListAsync();
         }
     }
 }

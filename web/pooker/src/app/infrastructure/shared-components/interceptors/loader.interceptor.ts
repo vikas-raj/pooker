@@ -18,9 +18,12 @@ export class LoaderInterceptor implements HttpInterceptor {
   constructor(private store: Store<fromStore.IAppState>) { }
   private initialValue = 0;
   private finalValue = 0;
+  private checkPlanningString = '/Planning/'
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.store.dispatch(appActions.setShowLoader({ showLoader: true }))
-    this.initialValue = this.initialValue + 1;
+    if (!(request.url.indexOf(this.checkPlanningString) > -1)) {
+      this.store.dispatch(appActions.setShowLoader({ showLoader: true }))
+      this.initialValue = this.initialValue + 1;
+    }
     request = request.clone({
       headers: new HttpHeaders({
         'content-Type': 'application/json',
@@ -29,9 +32,11 @@ export class LoaderInterceptor implements HttpInterceptor {
     });
     return next.handle(request).pipe(
       finalize(() => {
-        this.finalValue = this.finalValue + 1;
-        if (this.finalValue === this.initialValue) {
-          this.store.dispatch(appActions.setShowLoader({ showLoader: false }))
+        if (!(request.url.indexOf(this.checkPlanningString) > -1)) {
+          this.finalValue = this.finalValue + 1;
+          if (this.finalValue === this.initialValue) {
+            this.store.dispatch(appActions.setShowLoader({ showLoader: false }))
+          }
         }
       })
     );

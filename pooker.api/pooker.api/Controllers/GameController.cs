@@ -38,29 +38,6 @@ namespace pooker.api.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet("GetGameByGuid/{guid}")]
-        public async Task<IActionResult> GetGameById(string guid)
-        {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-
-            var email = identity.Claims.FirstOrDefault(x => x.Type == "Email").Value;
-            var name = identity.Claims.FirstOrDefault(x => x.Type == "Name").Value;
-            var userId = Convert.ToInt32(identity.Claims.FirstOrDefault(x => x.Type == "userId").Value);
-
-            var insertUpdateGameCommand = new AddUserToGameCommand(guid, userId);
-            await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
-
-            if (insertUpdateGameCommand.IsUserAdded)
-            {
-                //await this.hubContext.Clients.All.BroadcastMessage();
-            }
-
-            var getGameQuery = new GetGameQueryById(guid);
-            var game = await this.queryServiceAsync.ExecuteAsync(getGameQuery);
-            var gameResponse = this.mapper.Map<GameResponse>(game);
-            return this.Ok(gameResponse);
-        }
-
         [HttpGet("GetGamesByUser")]
         public async Task<IActionResult> GetGamesByUser()
         {
@@ -81,6 +58,29 @@ namespace pooker.api.Controllers
             var insertUpdateGameCommand = new InsertUpdateGameCommand(req);
             await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
             return this.Ok();
+        }
+
+        [HttpGet("GetGameByGuid/{guid}")]
+        public async Task<IActionResult> GetGameById(string guid)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            //var email = identity.Claims.FirstOrDefault(x => x.Type == "Email").Value;
+            //var name = identity.Claims.FirstOrDefault(x => x.Type == "Name").Value;
+            var userId = Convert.ToInt32(identity.Claims.FirstOrDefault(x => x.Type == "userId").Value);
+
+            var insertUpdateGameCommand = new AddUserToGameCommand(guid, userId);
+            await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
+
+            if (insertUpdateGameCommand.IsUserAdded)
+            {
+                await this.hubContext.Clients.All.BroadcastMessage(insertUpdateGameCommand.GameId);
+            }
+
+            var getGameQuery = new GetGameQueryById(guid);
+            var game = await this.queryServiceAsync.ExecuteAsync(getGameQuery);
+            var gameResponse = this.mapper.Map<GameResponse>(game);
+            return this.Ok(gameResponse);
         }
     }
 }

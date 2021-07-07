@@ -6,7 +6,9 @@ import { IUserStoryRequest } from "../models/IUserStoryRequest";
 export const getGameById = createAction(
     '[Planning Component] Get Game Detail by Id',
     props<{ userGuid: string }>());
-
+export const getPlanningGameById = createAction(
+    '[Planning Component] Get Planning Game Detail by Id',
+    props<{ userGuid: string }>());
 export const setGame = createAction(
     '[Planning Component] Set Game Detail by Id',
     props<{ data: IGame }>());

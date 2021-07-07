@@ -22,6 +22,19 @@ export class PlanningEffect {
       )
     )
   );
+
+  getPlanningGameById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PlanningActions.getPlanningGameById),
+      switchMap((action) =>
+        this.planningService.getPlanningGameById(action.userGuid).pipe(
+          map((data) => PlanningActions.setGame({ data: data })),
+          //catchError(errors => of(DashboardActions.setErrors({ errors: errors })))
+        )
+      )
+    )
+  );
+  
   insertUpdateUserStoryDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlanningActions.insertUpdateUserStory),

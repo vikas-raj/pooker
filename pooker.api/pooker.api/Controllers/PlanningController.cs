@@ -15,7 +15,7 @@
     using Pooker.api.SignalR;
     using Microsoft.AspNetCore.SignalR;
     using Pooker.DTO.Response;
-    using System.Collections.Generic;
+
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -43,6 +43,29 @@
         //    await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
         //    return this.Ok();
         //}
+
+        [HttpGet("GetGameByGuid/{guid}")]
+        public async Task<IActionResult> GetGameById(string guid)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            //var email = identity.Claims.FirstOrDefault(x => x.Type == "Email").Value;
+            //var name = identity.Claims.FirstOrDefault(x => x.Type == "Name").Value;
+            var userId = Convert.ToInt32(identity.Claims.FirstOrDefault(x => x.Type == "userId").Value);
+
+            var insertUpdateGameCommand = new AddUserToGameCommand(guid, userId);
+            await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
+
+            if (insertUpdateGameCommand.IsUserAdded)
+            {
+                await this.hubContext.Clients.All.BroadcastMessage(insertUpdateGameCommand.GameId);
+            }
+
+            var getGameQuery = new GetGameQueryById(guid);
+            var game = await this.queryServiceAsync.ExecuteAsync(getGameQuery);
+            var gameResponse = this.mapper.Map<GameResponse>(game);
+            return this.Ok(gameResponse);
+        }
 
         [HttpPost("InsertUpdateUserStory")]
         public async Task<IActionResult> InsertUpdateUserStory([FromBody] UserStoryDto req)
