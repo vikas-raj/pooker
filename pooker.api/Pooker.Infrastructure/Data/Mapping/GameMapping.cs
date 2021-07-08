@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pooker.Infrastructure.Data.Mapping
+﻿namespace Pooker.Infrastructure.Data.Mapping
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -17,6 +13,12 @@ namespace Pooker.Infrastructure.Data.Mapping
                 .WithMany(a => a.Games)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK_Game_User")
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(d => d.CardType)
+                .WithMany(a => a.Games)
+                .HasForeignKey(d => d.CardTypeId)
+                .HasConstraintName("FK_Game_CardType")
                     .OnDelete(DeleteBehavior.Restrict);
         }
     }

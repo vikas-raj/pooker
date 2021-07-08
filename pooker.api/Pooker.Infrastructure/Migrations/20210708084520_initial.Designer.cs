@@ -10,7 +10,7 @@ using Pooker.Infrastructure.Data.Configuration;
 namespace Pooker.Infrastructure.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20210704091455_initial")]
+    [Migration("20210708084520_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,79 @@ namespace Pooker.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Pooker.Domain.Domain.Card", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CardTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CardTypeId");
+
+                    b.ToTable("Card");
+                });
+
+            modelBuilder.Entity("Pooker.Domain.Domain.CardType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CardType");
+                });
 
             modelBuilder.Entity("Pooker.Domain.Domain.Game", b =>
                 {
@@ -32,6 +105,9 @@ namespace Pooker.Infrastructure.Migrations
 
                     b.Property<bool>("AllowUserToChangeVote")
                         .HasColumnType("bit");
+
+                    b.Property<int>("CardTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -76,6 +152,8 @@ namespace Pooker.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CardTypeId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Game");
@@ -89,6 +167,9 @@ namespace Pooker.Infrastructure.Migrations
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CardId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -113,10 +194,9 @@ namespace Pooker.Infrastructure.Migrations
                     b.Property<int>("UserStoryDetailId")
                         .HasColumnType("int");
 
-                    b.Property<int>("storyPoint")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CardId");
 
                     b.HasIndex("UserId");
 
@@ -231,7 +311,17 @@ namespace Pooker.Infrastructure.Migrations
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsCurrentUserStory")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsUserStoryActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
@@ -239,7 +329,7 @@ namespace Pooker.Infrastructure.Migrations
                     b.Property<string>("StoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StoryPoint")
+                    b.Property<int?>("StoryPoint")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -255,8 +345,27 @@ namespace Pooker.Infrastructure.Migrations
                     b.ToTable("UserStoryDetail");
                 });
 
+            modelBuilder.Entity("Pooker.Domain.Domain.Card", b =>
+                {
+                    b.HasOne("Pooker.Domain.Domain.CardType", "CardType")
+                        .WithMany("Cards")
+                        .HasForeignKey("CardTypeId")
+                        .HasConstraintName("FK_Card_CardType")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CardType");
+                });
+
             modelBuilder.Entity("Pooker.Domain.Domain.Game", b =>
                 {
+                    b.HasOne("Pooker.Domain.Domain.CardType", "CardType")
+                        .WithMany("Games")
+                        .HasForeignKey("CardTypeId")
+                        .HasConstraintName("FK_Game_CardType")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Pooker.Domain.Domain.User", "User")
                         .WithMany("Games")
                         .HasForeignKey("UserId")
@@ -264,11 +373,20 @@ namespace Pooker.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("CardType");
+
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("Pooker.Domain.Domain.GameBoard", b =>
                 {
+                    b.HasOne("Pooker.Domain.Domain.Card", "Card")
+                        .WithMany("GameBoards")
+                        .HasForeignKey("CardId")
+                        .HasConstraintName("FK_GameBoard_Card")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Pooker.Domain.Domain.User", "User")
                         .WithMany("GameBoards")
                         .HasForeignKey("UserId")
@@ -282,6 +400,8 @@ namespace Pooker.Infrastructure.Migrations
                         .HasConstraintName("FK_GameBoard_UserStoryDetail")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Card");
 
                     b.Navigation("User");
 
@@ -319,6 +439,18 @@ namespace Pooker.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("Pooker.Domain.Domain.Card", b =>
+                {
+                    b.Navigation("GameBoards");
+                });
+
+            modelBuilder.Entity("Pooker.Domain.Domain.CardType", b =>
+                {
+                    b.Navigation("Cards");
+
+                    b.Navigation("Games");
                 });
 
             modelBuilder.Entity("Pooker.Domain.Domain.Game", b =>

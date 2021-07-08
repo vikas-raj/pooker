@@ -31,7 +31,7 @@ namespace Pooker.ApplicationService.Commands
             }
             else
             {
-                gameBoard.StoryPoint = this.userGameBoardDto.StoryPoint;
+                //gameBoard.StoryPoint = this.userGameBoardDto.StoryPoint;
             }
 
             await dbContext.SaveChangesAsync();
@@ -41,7 +41,7 @@ namespace Pooker.ApplicationService.Commands
         {
             return new GameBoard()
             {
-                StoryPoint = this.userGameBoardDto.StoryPoint,
+                //StoryPoint = this.userGameBoardDto.StoryPoint,
                 UserId = this.userGameBoardDto.UserId,
                 UserStoryDetailId = this.userGameBoardDto.UserStoryDetailId
             };

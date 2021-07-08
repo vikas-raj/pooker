@@ -8,6 +8,24 @@ namespace Pooker.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CardType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CardType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -29,6 +47,31 @@ namespace Pooker.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Card",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CardTypeId = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Card", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Card_CardType",
+                        column: x => x.CardTypeId,
+                        principalTable: "CardType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Game",
                 columns: table => new
                 {
@@ -43,6 +86,7 @@ namespace Pooker.Infrastructure.Migrations
                     IsAutoFlip = table.Column<bool>(type: "bit", nullable: false),
                     AllowUserToChangeVote = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    CardTypeId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -52,6 +96,12 @@ namespace Pooker.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Game", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Game_CardType",
+                        column: x => x.CardTypeId,
+                        principalTable: "CardType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Game_User",
                         column: x => x.UserId,
@@ -97,9 +147,11 @@ namespace Pooker.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StoryPoint = table.Column<int>(type: "int", nullable: false),
+                    StoryPoint = table.Column<int>(type: "int", nullable: true),
                     StoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GameId = table.Column<int>(type: "int", nullable: false),
+                    IsCurrentUserStory = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    IsUserStoryActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -123,9 +175,9 @@ namespace Pooker.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    storyPoint = table.Column<int>(type: "int", nullable: false),
-                    UserStoryDetailId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    UserStoryDetailId = table.Column<int>(type: "int", nullable: false),
+                    CardId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -135,6 +187,12 @@ namespace Pooker.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GameBoard", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GameBoard_Card",
+                        column: x => x.CardId,
+                        principalTable: "Card",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GameBoard_User",
                         column: x => x.UserId,
@@ -150,9 +208,24 @@ namespace Pooker.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Card_CardTypeId",
+                table: "Card",
+                column: "CardTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_CardTypeId",
+                table: "Game",
+                column: "CardTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Game_UserId",
                 table: "Game",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GameBoard_CardId",
+                table: "GameBoard",
+                column: "CardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameBoard_UserId",
@@ -196,10 +269,16 @@ namespace Pooker.Infrastructure.Migrations
                 name: "GameUserXREF");
 
             migrationBuilder.DropTable(
+                name: "Card");
+
+            migrationBuilder.DropTable(
                 name: "UserStoryDetail");
 
             migrationBuilder.DropTable(
                 name: "Game");
+
+            migrationBuilder.DropTable(
+                name: "CardType");
 
             migrationBuilder.DropTable(
                 name: "User");

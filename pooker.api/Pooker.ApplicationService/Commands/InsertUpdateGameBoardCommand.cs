@@ -25,7 +25,7 @@
             }
             else
             {
-                gameBoard.StoryPoint = this.gameBoardDto.StoryPoint;
+                //gameBoard.StoryPoint = this.gameBoardDto.StoryPoint;
             }
 
             await dbContext.SaveChangesAsync();
@@ -37,7 +37,7 @@
             {
                 UserId = this.userId,
                 UserStoryDetailId = this.gameBoardDto.StoryId,
-                StoryPoint = this.gameBoardDto.StoryPoint,
+                //StoryPoint = this.gameBoardDto.StoryPoint,
             };
         }
     }

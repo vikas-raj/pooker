@@ -22,6 +22,11 @@ namespace Pooker.Infrastructure.Data.Mapping
                 .WithMany(a => a.GameBoards)
                 .HasForeignKey(d => d.UserStoryDetailId)
                 .HasConstraintName("FK_GameBoard_UserStoryDetail");
+
+            builder.HasOne(d => d.Card)
+                .WithMany(a => a.GameBoards)
+                .HasForeignKey(d => d.CardId)
+                .HasConstraintName("FK_GameBoard_Card");
         }
     }
 }
