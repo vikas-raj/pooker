@@ -1,6 +1,6 @@
 <div class="players-cards-container">
   <div class="player-cards-wrapper">
-    <div class="card-rig card-in-hand" *ngFor="let card of [0,1,2,3,5,8,13, 21, 34, 55, 89, 'Pass']; let i = index"
+    <div class="card-rig card-in-hand" *ngFor="let card of cards; let i = index"
          [ngStyle]="{'left': getLeftValue(i)+ '%'}" [ngClass]="{'selected': selectedIndex == i}" (click)="onClick(card, i)">
       <div class="card-wrapper perspective-wrapper">
         <div class="animation-wrapper" style="transform: matrix(1, 0, 0, 1, 0, 0);"
@@ -9,10 +9,10 @@
             <div class="card card-back"></div>
             <div class="card card-face">
               <div class="small-card-id">
-                <span>{{card}}</span>
+                <span>{{card.value}}</span>
               </div>
               <div class="text-center player-vote">
-                <span>{{card}}</span>
+                <span>{{card.value}}</span>
               </div>
             </div>
           </div>

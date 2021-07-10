@@ -11,6 +11,9 @@ import { takeUntil } from 'rxjs/operators';
 import { IUserStoryRequest } from '../../models/IUserStoryRequest';
 import { environment } from 'src/environments/environment';
 import { IGameBoardDto } from '../../models/IGameBoardDto';
+import { ICard } from 'src/app/models/ICard';
+import { IGameBoard } from 'src/app/models/IGameBoard';
+import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 @Component({
   selector: 'app-planning-shell',
   templateUrl: './planning-shell.component.html',
@@ -18,9 +21,11 @@ import { IGameBoardDto } from '../../models/IGameBoardDto';
 })
 export class PlanningShellComponent implements OnInit {
   opened: boolean = false;
+  activeUserStory: IUserStoryDetail | undefined;
   gameGuid: string = '';
   game: IGame = {};
   game$: Observable<IGame> | undefined;
+  cards$: Observable<ICard[]> | undefined;
   gameSub: Subscription | undefined;
   ngDestroy$ = new Subject();
   constructor(private route: ActivatedRoute,
@@ -36,9 +41,13 @@ export class PlanningShellComponent implements OnInit {
     this.activateSignalR();
     this.gameGuid = this.route.snapshot.params.id;
     this.game$ = this.storePlanning.pipe(takeUntil(this.ngDestroy$), select(fromPlanning.selectGame))
+    this.cards$ = this.storePlanning.pipe(takeUntil(this.ngDestroy$), select(fromPlanning.selectCards))
+
     this.gameSub = this.game$.subscribe((game) => {
       this.game = game;
-    })
+      this.activeUserStory = this.game?.userStoryDetails?.find(x => x.isCurrentUserStory);
+    });
+    this.storePlanning.dispatch(PlanningActions.getCardsByGameId({ userGuid: this.gameGuid }))
     this.storePlanning.dispatch(PlanningActions.getGameById({ userGuid: this.gameGuid }))
   }
   onAddNewUserStory($event: boolean) {
@@ -47,7 +56,7 @@ export class PlanningShellComponent implements OnInit {
 
   dialogResponse($event: DialogResponse) {
     const userStoryRequest: IUserStoryRequest = {
-      gameId: 1,
+      gameId: this.game?.id,
       isUserStoryActive: true,
       storyName: $event.formValues.storyName,
     };
@@ -58,8 +67,9 @@ export class PlanningShellComponent implements OnInit {
     console.log($event);
   }
 
-  onSelectPoint($event: IGameBoardDto) {
-
+  onSelectPlayCard($event: IGameBoardDto) {
+    $event = { ...$event, gameId: this.game?.id };
+    this.storePlanning.dispatch(PlanningActions.selectCardOnGameBoard({ point: $event }));
   }
 
   activateSignalR() {

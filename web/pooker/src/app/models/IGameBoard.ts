@@ -1,11 +1,15 @@
+import { ICard } from "./ICard";
 import { IUser } from "./Iuser";
 import { IUserStoryDetail } from "./IUserStoryDetail";
 
-export interface IGameBoard{
+export interface IGameBoard {
     id?: number;
     storyPoint?: number;
-    userId?:number;
-    User?: IUser;
+    userId?: number;
+    cardId?: number;
     userStoryDetailId?: number;
-    UserStoryDetail?:IUserStoryDetail;
+
+    user?: IUser;
+    card?: ICard;
+    userStoryDetail?: IUserStoryDetail;
 }

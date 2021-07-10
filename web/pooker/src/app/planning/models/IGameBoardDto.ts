@@ -1,4 +1,5 @@
 export interface IGameBoardDto {
-    storyPoint?: number;
-    storyId: number;
+    cardId?: number;
+    storyId?: number;
+    gameId?: number;
 }

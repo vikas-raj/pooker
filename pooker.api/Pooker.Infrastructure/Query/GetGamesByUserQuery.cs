@@ -22,6 +22,8 @@ namespace Pooker.Infrastructure.Query
                            .Include(x => x.Game)
                            .ThenInclude(x => x.UserStoryDetails)
                            .ThenInclude(x => x.GameBoards)
+                           .Include(x => x.Game)
+                           .ThenInclude(x => x.CardType)
                            .Include(x => x.User)
                             .Where(x => x.UserId == this.UserId && !x.Game.IsDeleted).Select(a => new Game() { 
                                 Name = a.Game.Name,
@@ -30,6 +32,7 @@ namespace Pooker.Infrastructure.Query
                                 CreatedOn = a.Game.CreatedOn,
                                 Description = a.Game.Description,
                                 Guid = a.Game.Guid,
+                                CardType = a.Game.CardType,
                             }).ToListAsync();
         }
     }

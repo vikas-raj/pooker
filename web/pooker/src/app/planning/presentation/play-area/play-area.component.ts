@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IGame } from 'src/app/models/IGame';
+import { IGameBoard } from 'src/app/models/IGameBoard';
 import { IGameUserXREF } from 'src/app/models/IGameUserXREF';
 import { IPlayAreaViewModel } from '../../models/IPlayAreaViewModel';
 
@@ -17,20 +18,28 @@ export class PlayAreaComponent implements OnInit, OnChanges {
   }
   ngOnChanges(simpleChanges: SimpleChanges) {
     if (this.game?.id) {
-      this.bindViewModel(this.game.gameUserXREFs);
+      this.bindViewModel(this.game);
     }
   }
 
-  bindViewModel(gameUserXREFs: IGameUserXREF[] | undefined) {
+  bindViewModel(game: IGame | undefined) {
+    const gameBoards = game?.userStoryDetails?.find(x => x.isCurrentUserStory)?.gameBoards;
     this.playAreaViewModel = [];
-    gameUserXREFs?.forEach(x => {
+    game?.gameUserXREFs?.forEach(x => {
+      const gameBoard = gameBoards?.find(y => y.userId == x.user?.id)
       const playAreaUser: IPlayAreaViewModel = {
         name: x.user?.username,
-        isCardSelected: false,
+        isCardSelected: this.isRealValue(gameBoard),
         isCardsFlip: false,
         value: 0,
       };
       this.playAreaViewModel.push(playAreaUser);
-    })
+    });
+
+    debugger;
+  }
+
+  isRealValue(obj?: IGameBoard) {
+    return !(obj === 'null' || obj === 'undefined' || obj === undefined || obj === null);
   }
 }

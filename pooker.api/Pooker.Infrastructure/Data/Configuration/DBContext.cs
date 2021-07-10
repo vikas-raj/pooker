@@ -25,7 +25,10 @@ namespace Pooker.Infrastructure.Data.Configuration
         public DbSet<GameBoard> GameBoard { get; set; }
         public DbSet<UserStoryDetail> UserStoryDetail { get; set; }
         public DbSet<GameUserXREF> GameUserXREF { get; set; }
+        public DbSet<Card> Card { get; set; }
+        public DbSet<CardType> CardType { get; set; }
 
+        
         public virtual Task<int> SaveChangesAsync(string userId, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(userId))

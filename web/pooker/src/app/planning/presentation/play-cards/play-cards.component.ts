@@ -1,5 +1,7 @@
 import { NullTemplateVisitor } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { ICard } from 'src/app/models/ICard';
+import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 import { IGameBoardDto } from '../../models/IGameBoardDto';
 
 @Component({
@@ -10,8 +12,10 @@ import { IGameBoardDto } from '../../models/IGameBoardDto';
 export class PlayCardsComponent implements OnInit {
   initialLeftValue = 2;
   selectedIndex?: number = undefined;
-  @Input() activeUserStoryId: number = 0;
-  @Output() selectPoint = new EventEmitter<IGameBoardDto>();
+  @Input() activeUserStory: IUserStoryDetail | undefined;
+
+  @Input() cards: ICard[] | null = []
+  @Output() selectPlayCard = new EventEmitter<IGameBoardDto>();
   constructor() { }
 
   ngOnInit(): void {
@@ -21,12 +25,12 @@ export class PlayCardsComponent implements OnInit {
     this.initialLeftValue = i == 0 ? 2 : this.initialLeftValue + 7.3;
     return i == 0 ? 2 : this.initialLeftValue;
   }
-  onClick(card: number | string, index: number) {
+  onClick(card:  ICard, index: number) {
     const gameBoardDto: IGameBoardDto = {
-      storyId: this.activeUserStoryId,
-      storyPoint: isNaN(+card) ? +card : undefined
+      storyId: this.activeUserStory?.id,
+      cardId: card.id
     };
-    this.selectPoint.emit(gameBoardDto);
+    this.selectPlayCard.emit(gameBoardDto);
     this.selectedIndex = index;
   }
 }

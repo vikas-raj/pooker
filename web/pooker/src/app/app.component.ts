@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IUser } from './models/Iuser';
+import { UserHelper } from './services/user-helper.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { IUser } from './models/Iuser';
 })
 export class AppComponent {
   title = 'pooker';
-
+  userHelper: UserHelper;
+  constructor(){
+    this.userHelper = new UserHelper()
+  }
   ngOnInit() {
     this.getTokenDetails();
     // this.getDecodedAccessToken();
@@ -27,15 +31,17 @@ export class AppComponent {
 
     // Other functions
     const expirationDate = helper.getTokenExpirationDate(token);
-    debugger;
+    //debugger;
     const isExpired = helper.isTokenExpired(token);
     if (!isExpired) {
       var user = <IUser>{};
       // var userType = EmployeeType;
       // user.role = +userType[decodedToken.userType]; //EmployeeType.Mother. decodedToken.userType;
       user.token = token;
-      user.username = decodedToken.sub;
+      user.username = decodedToken.username;
+      user.email = decodedToken.email;
       user.id = +decodedToken.userId;
+      this.userHelper.setData(user.id, user.email ,user.username)
       // this.service.userSubject.next(user);
     } else {
       localStorage.removeItem('pooker_token')

@@ -20,7 +20,7 @@ namespace pooker.api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class GameController : ControllerBase
+    public class GameController : PookerControllerBase
     {
         private IQueryServiceAsync queryServiceAsync = null;
         private ICommandServiceAsync commandServiceAsync = null;
@@ -41,11 +41,7 @@ namespace pooker.api.Controllers
         [HttpGet("GetGamesByUser")]
         public async Task<IActionResult> GetGamesByUser()
         {
-            var identity = this.User.Identity as ClaimsIdentity;
-
-            var userId = Convert.ToInt32(identity.Claims.FirstOrDefault(x => x.Type == "userId").Value);
-
-            var getGamesQuery = new GetGamesByUserQuery(userId);
+            var getGamesQuery = new GetGamesByUserQuery(this.UserId);
             var games = await this.queryServiceAsync.ExecuteAsync(getGamesQuery);
             var gamesResponse = this.mapper.Map<IEnumerable<GameResponse>>(games);
 
@@ -55,21 +51,23 @@ namespace pooker.api.Controllers
         [HttpPost("CreateGame")]
         public async Task<IActionResult> CreateGame([FromBody] GameRequest req)
         {
-            var insertUpdateGameCommand = new InsertUpdateGameCommand(req);
-            await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
-            return this.Ok();
+            try
+            {
+                var insertUpdateGameCommand = new InsertUpdateGameCommand(req);
+                await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
+                return this.Ok();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         [HttpGet("GetGameByGuid/{guid}")]
         public async Task<IActionResult> GetGameById(string guid)
         {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-
-            //var email = identity.Claims.FirstOrDefault(x => x.Type == "Email").Value;
-            //var name = identity.Claims.FirstOrDefault(x => x.Type == "Name").Value;
-            var userId = Convert.ToInt32(identity.Claims.FirstOrDefault(x => x.Type == "userId").Value);
-
-            var insertUpdateGameCommand = new AddUserToGameCommand(guid, userId);
+            var insertUpdateGameCommand = new AddUserToGameCommand(guid, this.UserId);
             await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
 
             if (insertUpdateGameCommand.IsUserAdded)
@@ -82,5 +80,15 @@ namespace pooker.api.Controllers
             var gameResponse = this.mapper.Map<GameResponse>(game);
             return this.Ok(gameResponse);
         }
+
+        [HttpGet("GetCardsByGameId/{guid}")]
+        public async Task<IActionResult> GetCardsByGameId(string guid)
+        {
+            var getCardsByGameIdQuery = new GetCardsByGameIdQuery(guid);
+            var cards = await this.queryServiceAsync.ExecuteAsync(getCardsByGameIdQuery);
+
+            return Ok(cards);
+        }
+
     }
 }

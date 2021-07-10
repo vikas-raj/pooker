@@ -13,20 +13,6 @@ import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 export class ListComponent implements OnInit {
   @Input() games: IGame[] | null = [];
 
-  games1: IGame[] = [
-    {
-      id: 1, name: 'Game 1', velocity: 100, description: 'description test',
-      createdDate: new Date(), userStoryDetails: [],
-    },
-    {
-      id: 2, name: 'Game 2', velocity: 10, description: 'description test2',
-      createdDate: new Date(), userStoryDetails: [],
-    },
-    {
-      id: 3, name: 'Game 3', velocity: 10, description: 'description test2',
-      createdDate: new Date(), userStoryDetails: [],
-    }
-  ];
   constructor(private router: Router) { }
   ngOnInit(): void {
   }
@@ -34,9 +20,11 @@ export class ListComponent implements OnInit {
     return userStoryDetails?.map(x => x.storyPoint)?.reduce((prev, next) => prev + next, 0);
   }
   totalUsers(userStoryDetails?: IUserStoryDetail[]) {
-    const gameBoards: IGameBoard[] = [];
+    let gameBoards: IGameBoard[] = [];
     userStoryDetails?.forEach(x => {
-      if (x?.gameBoards?.length) { gameBoards.push.apply(x.gameBoards) }
+      if (x?.gameBoards?.length) { 
+        gameBoards = [...gameBoards, ...x.gameBoards]
+      }
     });
     const users = gameBoards?.map(x => x.userId)?.filter((item, i, ar) => ar.indexOf(item) == i)
     return users?.length;

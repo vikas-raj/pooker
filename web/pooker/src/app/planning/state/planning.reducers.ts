@@ -4,11 +4,16 @@ import * as PlanningActions from './planning.action';
 
 export const initialState: IPlanningState = {
   game: {},
+  cards: []
 }
 const _planningReducer = createReducer(initialState,
   on(PlanningActions.setGame, (state, { data }) => ({
     ...state,
     game: data
+  })),
+  on(PlanningActions.setPlayCards, (state, { data }) => ({
+    ...state,
+    cards: data
   })),
 );
 

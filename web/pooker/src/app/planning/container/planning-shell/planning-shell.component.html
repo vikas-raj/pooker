@@ -18,15 +18,14 @@
                   <span *ngIf="!opened" class="navigator next-navigator"></span>
                 </button>
               </p>
-            </div>
+            </ div>
             <div class="all-players-cards-selected">
               <div class="scroll-container flex">
                 <app-play-area [game]="game$ | async"></app-play-area>
               </div>
             </div>
             <div class="players-cards-container">
-              <app-play-cards (selectPoint)="onSelectPoint($event)"></app-play-cards>
-
+              <app-play-cards [activeUserStory]="activeUserStory" [cards]="cards$ | async" (selectPlayCard)="onSelectPlayCard($event)"></app-play-cards>
             </div>
           </div>
         </div>
@@ -34,5 +33,6 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
 
 <app-dialog *ngIf="showAddNewUserStory" (dialogResponse)="dialogResponse($event)" [dialogConfig]="dialogConfig" ></app-dialog>

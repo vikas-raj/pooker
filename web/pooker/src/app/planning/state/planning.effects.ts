@@ -23,6 +23,18 @@ export class PlanningEffect {
     )
   );
 
+  getCardsByGameId$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PlanningActions.getCardsByGameId),
+      switchMap((action) =>
+        this.planningService.getCardsByGameId(action.userGuid).pipe(
+          map((data) => PlanningActions.setPlayCards({ data: data })),
+          //catchError(errors => of(DashboardActions.setErrors({ errors: errors })))
+        )
+      )
+    )
+  );
+
   getPlanningGameById$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlanningActions.getPlanningGameById),
@@ -34,28 +46,28 @@ export class PlanningEffect {
       )
     )
   );
-  
+
   insertUpdateUserStoryDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlanningActions.insertUpdateUserStory),
       switchMap((action) =>
         this.planningService.insertUpdateUserStoryDetail(action.data).pipe(
-          map((data) => PlanningActions.setGame({ data: data })),
+          // map((data) => PlanningActions.setPlanningResponse({ data: data })),
           //catchError(errors => of(DashboardActions.setErrors({ errors: errors })))
         )
       )
     )
   );
-  
+
   selectStoryPoint$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(PlanningActions.selectStoryPointOnGameBoard),
-    switchMap((action) =>
-      this.planningService.insertUpdateUserStoryDetail(action.point).pipe(
-        map((data) => PlanningActions.setGame({ data: data })),
-        //catchError(errors => of(DashboardActions.setErrors({ errors: errors })))
+    this.actions$.pipe(
+      ofType(PlanningActions.selectCardOnGameBoard),
+      switchMap((action) =>
+        this.planningService.insertUdateSelectedCard(action.point).pipe(
+          map((data) => PlanningActions.setPlanningResponse({ data: data })),
+          //catchError(errors => of(DashboardActions.setErrors({ errors: errors })))
+        )
       )
     )
-  )
-);
+  );
 }

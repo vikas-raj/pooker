@@ -36,14 +36,6 @@
             this.mapper = mapper;
         }
 
-        //[HttpPost("InsertUpdateGameBoard")]
-        //public async Task<IActionResult> InsertUpdateGameBoard([FromBody] UserGameBoardDto req)
-        //{
-        //    var insertUpdateGameCommand = new AddUserToGameBoardCommand(req);
-        //    await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
-        //    return this.Ok();
-        //}
-
         [HttpGet("GetGameByGuid/{guid}")]
         public async Task<IActionResult> GetGameById(string guid)
         {
@@ -81,6 +73,8 @@
         {
             var insertUpdateGameCommand = new InsertUpdateGameBoardCommand(req, this.UserId);
             await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
+            await this.hubContext.Clients.All.BroadcastMessage(req.GameId);
+
             return this.Ok();
         }
     }

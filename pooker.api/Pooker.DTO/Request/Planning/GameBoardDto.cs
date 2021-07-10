@@ -6,7 +6,8 @@ namespace Pooker.DTO.Request
 {
     public class GameBoardDto
     {
-        public int? StoryPoint { get; set; }
+        public int CardId { get; set; }
         public int StoryId { get; set; }
+        public int GameId { get; set; }
     }
 }

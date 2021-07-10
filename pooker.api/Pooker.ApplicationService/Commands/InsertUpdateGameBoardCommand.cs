@@ -22,10 +22,12 @@
             if (gameBoard == null)
             {
                 gameBoard = this.CreateGameBoard();
+
+                dbContext.GameBoard.Add(gameBoard);
             }
             else
             {
-                //gameBoard.StoryPoint = this.gameBoardDto.StoryPoint;
+                gameBoard.CardId = this.gameBoardDto.CardId;
             }
 
             await dbContext.SaveChangesAsync();
@@ -37,7 +39,7 @@
             {
                 UserId = this.userId,
                 UserStoryDetailId = this.gameBoardDto.StoryId,
-                //StoryPoint = this.gameBoardDto.StoryPoint,
+                CardId = this.gameBoardDto.CardId,
             };
         }
     }

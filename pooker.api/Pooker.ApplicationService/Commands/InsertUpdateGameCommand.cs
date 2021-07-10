@@ -4,6 +4,7 @@
     using Pooker.Domain.Domain;
     using Pooker.DTO.Request;
     using Pooker.Infrastructure.Data.Configuration;
+    using System;
     using System.Threading.Tasks;
     public class InsertUpdateGameCommand : CommandAsync<DBContext>
     {
@@ -15,7 +16,9 @@
 
         public override async Task ExecuteAsync(DBContext dbContext)
         {
-            dbContext.Game.Add(CreateGame());
+            var game = CreateGame();
+            game.GameUserXREFs.Add(CreateGameUserXREF());
+            dbContext.Game.Add(game);
             dbContext.SaveChangesAsync();
         }
 
@@ -31,7 +34,16 @@
                 UserId = this.gameRequest.UserId,
                 ShowVelocityToUser = this.gameRequest.ShowVelocityToUser,
                 Velocity = this.gameRequest.Velocity,
-        };
+                CardTypeId = 3,
+                Guid = Guid.NewGuid().ToString(),
+            };
+        }
+
+        private GameUserXREF CreateGameUserXREF() {
+            return new GameUserXREF()
+            {
+                UserId = this.gameRequest.UserId,
+            };
+        }
     }
-}
 }
