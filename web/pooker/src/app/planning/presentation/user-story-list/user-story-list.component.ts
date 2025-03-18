@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 
 @Component({
-  selector: 'app-user-story-list',
-  templateUrl: './user-story-list.component.html',
-  styleUrls: ['./user-story-list.component.scss']
+    selector: 'app-user-story-list',
+    templateUrl: './user-story-list.component.html',
+    styleUrls: ['./user-story-list.component.scss'],
+    standalone: false
 })
 export class UserStoryListComponent implements OnInit {
   @Input() userStories: IUserStoryDetail[] | undefined = [];

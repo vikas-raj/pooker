@@ -1,4 +1,3 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { IGame } from 'src/app/models/IGame';
@@ -6,9 +5,10 @@ import { IGameBoard } from 'src/app/models/IGameBoard';
 import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 
 @Component({
-  selector: 'app-dashboard-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+    selector: 'app-dashboard-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.scss'],
+    standalone: false
 })
 export class ListComponent implements OnInit {
   @Input() games: IGame[] | null = [];

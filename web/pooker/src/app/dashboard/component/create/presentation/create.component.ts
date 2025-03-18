@@ -4,9 +4,10 @@ import { GenericForm } from 'src/app/infrastructure/shared-components/dialog/dia
 import { IGenericFormResponse } from '../../../../models/IGenericFormResponse';
 
 @Component({
-  selector: 'app-dashboard-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+    selector: 'app-dashboard-create',
+    templateUrl: './create.component.html',
+    styleUrls: ['./create.component.scss'],
+    standalone: false
 })
 export class CreateComponent implements OnInit {
   @Output() createGame = new EventEmitter<IGenericFormResponse>();

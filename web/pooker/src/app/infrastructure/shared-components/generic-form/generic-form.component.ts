@@ -1,17 +1,18 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { IGenericFormResponse } from '../../../models/IGenericFormResponse';
 import { ResponseEnum } from '../../../models/ResponseEnum';
 import { GenericForm } from '../dialog/dialog.config';
 
 @Component({
-  selector: 'app-generic-form',
-  templateUrl: './generic-form.component.html',
-  styleUrls: ['./generic-form.component.scss']
+    selector: 'app-generic-form',
+    templateUrl: './generic-form.component.html',
+    styleUrls: ['./generic-form.component.scss'],
+    standalone: false
 })
 export class GenericFormComponent implements OnInit {
   fieldPasswordType = false;
-  genericFormGroup: FormGroup = new FormGroup({});
+  genericFormGroup: UntypedFormGroup = new UntypedFormGroup({});
   @Input() formGroupInput: any[] = [];
   @Input() formValues: any = {};
   @Output() outputFormResponse = new EventEmitter<IGenericFormResponse>();
@@ -22,10 +23,10 @@ export class GenericFormComponent implements OnInit {
       let group: any = {}
       this.formGroupInput.forEach((formGroup: GenericForm) => {
         if (formGroup.name) {
-          group[formGroup.name] = new FormControl('', formGroup.validators);
+          group[formGroup.name] = new UntypedFormControl('', formGroup.validators);
         }
       });
-      this.genericFormGroup = new FormGroup(group);
+      this.genericFormGroup = new UntypedFormGroup(group);
       if (this.formValues) {
         this.genericFormGroup?.setValue(this.formValues);
       }

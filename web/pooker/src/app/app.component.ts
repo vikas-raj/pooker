@@ -4,9 +4,10 @@ import { IUser } from './models/Iuser';
 import { UserHelper } from './services/user-helper.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent {
   title = 'pooker';
@@ -16,6 +17,7 @@ export class AppComponent {
   }
   ngOnInit() {
     this.getTokenDetails();
+    
     // this.getDecodedAccessToken();
   }
 

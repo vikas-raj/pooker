@@ -1,16 +1,17 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTemplateComponent } from './dialog-template/dialog-template.component';
 import { DialogConfig, DialogResponse } from './dialog.config';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+    selector: 'app-dialog',
+    templateUrl: './dialog.component.html',
+    styleUrls: ['./dialog.component.scss'],
+    standalone: false
 })
 export class DialogComponent implements OnInit {
-  form?: FormGroup;
+  form?: UntypedFormGroup;
 
   @Input() dialogConfig?: DialogConfig;
 
@@ -21,7 +22,7 @@ export class DialogComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogTemplateComponent, {
       width: '750px',
       minHeight: '60%',
-      
+
       data: this.dialogConfig
     });
 

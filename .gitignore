@@ -18,3 +18,5 @@
 /pooker.api/pooker.api/pooker.api.csproj.user
 /web/pooker/.vs/*
 /pooker.api/Pooker.Infrastructure/Pooker.Infrastructure.csproj.user
+.angular/cache/*
+/web/pooker/.angular/cache/*

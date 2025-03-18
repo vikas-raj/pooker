@@ -9,9 +9,10 @@ import { ILoginUserDto } from '../../../../models/ILoginUserDto';
 import { UserManagementService } from 'src/app/user-management/services/user-management.service';
 
 @Component({
-  selector: 'app-login-shell',
-  templateUrl: './login-shell.component.html',
-  styleUrls: ['./login-shell.component.scss']
+    selector: 'app-login-shell',
+    templateUrl: './login-shell.component.html',
+    styleUrls: ['./login-shell.component.scss'],
+    standalone: false
 })
 export class LoginShellComponent implements OnInit {
 

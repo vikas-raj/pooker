@@ -8,9 +8,10 @@ import { IGame } from '../../../../../models/IGame';
 
 
 @Component({
-  selector: 'app-list-shell',
-  templateUrl: './list-shell.component.html',
-  styleUrls: ['./list-shell.component.scss']
+    selector: 'app-list-shell',
+    templateUrl: './list-shell.component.html',
+    styleUrls: ['./list-shell.component.scss'],
+    standalone: false
 })
 export class ListShellComponent implements OnInit {
   games$: Observable<IGame[]> | undefined;

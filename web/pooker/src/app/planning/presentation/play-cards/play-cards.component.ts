@@ -1,13 +1,13 @@
-import { NullTemplateVisitor } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ICard } from 'src/app/models/ICard';
 import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 import { IGameBoardDto } from '../../models/IGameBoardDto';
 
 @Component({
-  selector: 'app-play-cards',
-  templateUrl: './play-cards.component.html',
-  styleUrls: ['./play-cards.component.scss']
+    selector: 'app-play-cards',
+    templateUrl: './play-cards.component.html',
+    styleUrls: ['./play-cards.component.scss'],
+    standalone: false
 })
 export class PlayCardsComponent implements OnInit {
   initialLeftValue = 2;

@@ -7,9 +7,10 @@ import * as DashboardActions from '../../../../state/dashboard.action'
 import { IGenericFormResponse } from 'src/app/models/IGenericFormResponse';
 import { IGameRequest } from 'src/app/dashboard/models/IGameRequest';
 @Component({
-  selector: 'app-create-shell',
-  templateUrl: './create-shell.component.html',
-  styleUrls: ['./create-shell.component.scss']
+    selector: 'app-create-shell',
+    templateUrl: './create-shell.component.html',
+    styleUrls: ['./create-shell.component.scss'],
+    standalone: false
 })
 export class CreateShellComponent implements OnInit {
 

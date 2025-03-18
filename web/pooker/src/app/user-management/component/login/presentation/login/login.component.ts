@@ -3,9 +3,10 @@ import { GenericForm } from '../../../../../infrastructure/shared-components/dia
 import { IGenericFormResponse } from '../../../../../models/IGenericFormResponse';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   @Output() loginUser = new EventEmitter<IGenericFormResponse>();

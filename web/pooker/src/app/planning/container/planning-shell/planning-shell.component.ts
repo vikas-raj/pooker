@@ -15,9 +15,10 @@ import { ICard } from 'src/app/models/ICard';
 import { IGameBoard } from 'src/app/models/IGameBoard';
 import { IUserStoryDetail } from 'src/app/models/IUserStoryDetail';
 @Component({
-  selector: 'app-planning-shell',
-  templateUrl: './planning-shell.component.html',
-  styleUrls: ['./planning-shell.component.scss']
+    selector: 'app-planning-shell',
+    templateUrl: './planning-shell.component.html',
+    styleUrls: ['./planning-shell.component.scss'],
+    standalone: false
 })
 export class PlanningShellComponent implements OnInit {
   opened: boolean = false;

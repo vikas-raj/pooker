@@ -8,9 +8,10 @@ import * as UserManagementActions from '../../../../state/user-management.action
 import { IRegisterUserDto } from '../../../../models/IRegisterUserDto';
 
 @Component({
-  selector: 'app-register-shell',
-  templateUrl: './register-shell.component.html',
-  styleUrls: ['./register-shell.component.scss']
+    selector: 'app-register-shell',
+    templateUrl: './register-shell.component.html',
+    styleUrls: ['./register-shell.component.scss'],
+    standalone: false
 })
 export class RegisterShellComponent implements OnInit {
 

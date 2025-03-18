@@ -5,9 +5,10 @@ import { IGameUserXREF } from 'src/app/models/IGameUserXREF';
 import { IPlayAreaViewModel } from '../../models/IPlayAreaViewModel';
 
 @Component({
-  selector: 'app-play-area',
-  templateUrl: './play-area.component.html',
-  styleUrls: ['./play-area.component.scss']
+    selector: 'app-play-area',
+    templateUrl: './play-area.component.html',
+    styleUrls: ['./play-area.component.scss'],
+    standalone: false
 })
 export class PlayAreaComponent implements OnInit, OnChanges {
   @Input() game: IGame | null = {};
@@ -40,6 +41,6 @@ export class PlayAreaComponent implements OnInit, OnChanges {
   }
 
   isRealValue(obj?: IGameBoard) {
-    return !(obj === 'null' || obj === 'undefined' || obj === undefined || obj === null);
+    return !(obj === undefined || obj === null);
   }
 }

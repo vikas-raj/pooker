@@ -8,24 +8,23 @@ import { GenericFormComponent } from './shared-components/generic-form/generic-f
 import { PookerLoaderComponent } from './shared-components/pooker-loader/pooker-loader.component';
 
 @NgModule({
-  declarations: [
-    DialogComponent,
-    DialogTemplateComponent,
-    GenericFormComponent,
-    PookerLoaderComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule
-  ],
-  exports: [
-    CommonModule,
-    MaterialModule, GenericFormComponent,
-    DialogComponent, DialogTemplateComponent,
-    PookerLoaderComponent
-  ],
-  entryComponents: [DialogTemplateComponent]
+    declarations: [
+        DialogComponent,
+        DialogTemplateComponent,
+        GenericFormComponent,
+        PookerLoaderComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule
+    ],
+    exports: [
+        CommonModule,
+        MaterialModule, GenericFormComponent,
+        DialogComponent, DialogTemplateComponent,
+        PookerLoaderComponent
+    ]
 })
 export class InfrastructureModule { }

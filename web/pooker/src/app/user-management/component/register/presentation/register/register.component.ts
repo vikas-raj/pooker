@@ -3,9 +3,10 @@ import { GenericForm } from '../../../../../infrastructure/shared-components/dia
 import { IGenericFormResponse } from '../../../../../models/IGenericFormResponse';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss'],
+    standalone: false
 })
 export class RegisterComponent implements OnInit {
 

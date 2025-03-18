@@ -5,9 +5,10 @@ import {select, Store } from '@ngrx/store';
 import * as fromStore from 'src/app/state';
 
 @Component({
-  selector: 'app-pooker-loader',
-  templateUrl: './pooker-loader.component.html',
-  styleUrls: ['./pooker-loader.component.scss']
+    selector: 'app-pooker-loader',
+    templateUrl: './pooker-loader.component.html',
+    styleUrls: ['./pooker-loader.component.scss'],
+    standalone: false
 })
 export class PookerLoaderComponent implements OnInit {
   isLoading$: Observable<boolean> | undefined;
