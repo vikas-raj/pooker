@@ -57,9 +57,8 @@ namespace pooker.api.Controllers
                 await this.commandServiceAsync.ExecuteAsync(insertUpdateGameCommand);
                 return this.Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
         }
