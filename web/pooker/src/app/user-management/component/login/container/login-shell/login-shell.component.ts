@@ -7,12 +7,13 @@ import { takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { ILoginUserDto } from '../../../../models/ILoginUserDto';
 import { UserManagementService } from 'src/app/user-management/services/user-management.service';
+import { ResponseEnum } from 'src/app/models/ResponseEnum';
 
 @Component({
-    selector: 'app-login-shell',
-    templateUrl: './login-shell.component.html',
-    styleUrls: ['./login-shell.component.scss'],
-    standalone: false
+  selector: 'app-login-shell',
+  templateUrl: './login-shell.component.html',
+  styleUrls: ['./login-shell.component.scss'],
+  standalone: false
 })
 export class LoginShellComponent implements OnInit {
 
@@ -23,12 +24,17 @@ export class LoginShellComponent implements OnInit {
   }
 
   onLoginUser($event: IGenericFormResponse) {
-    const loginUserDto: ILoginUserDto = { ...$event.response}
-    this.userManagementService.loginUser(loginUserDto).subscribe((result)=>{
-      console.log(result);
-      localStorage.setItem('pooker_token', result?.tokenString);
-    });
+    if ($event.responseType == ResponseEnum.Submit) {
+      const loginUserDto: ILoginUserDto = { ...$event.response }
+      this.userManagementService.loginUser(loginUserDto).subscribe((result) => {
+        console.log(result);
+        localStorage.setItem('pooker_token', result?.tokenString);
+      });
+    }else{
+      
+    }
+
     // this.storeDashboard.dispatch(UserManagementActions.loginUser({ loginUserDto: loginUserDto }))
   }
-  
+
 }

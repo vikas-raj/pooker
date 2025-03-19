@@ -5,15 +5,16 @@
         <div class="form-group">
           <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
           <input type="text" class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
-                 placeholder="{{formElement.placeHolder}}">
+            placeholder="{{formElement.placeHolder}}">
         </div>
       </div>
       <div *ngSwitchCase="'password'">
         <div class="form-group ">
           <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
           <div>
-            <input [type]="fieldPasswordType ? 'text' : 'password'" class="form-control password-input" formControlName="{{formElement.name}}" id="{{formElement.name}}"
-                   placeholder="{{formElement.placeHolder}}">
+            <input [type]="fieldPasswordType ? 'text' : 'password'" class="form-control password-input"
+              formControlName="{{formElement.name}}" id="{{formElement.name}}"
+              placeholder="{{formElement.placeHolder}}">
             <i class="fa " [ngClass]="{
                    'fa-eye-slash': !fieldPasswordType,
                    'fa-eye': fieldPasswordType
@@ -44,22 +45,22 @@
       <div *ngSwitchCase="'confirmPassword'">
         <div class="form-group">
           <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
-          <input type="password" class="form-control password-input" formControlName="{{formElement.name}}" id="{{formElement.name}}"
-                 placeholder="{{formElement.placeHolder}}">
+          <input type="password" class="form-control password-input" formControlName="{{formElement.name}}"
+            id="{{formElement.name}}" placeholder="{{formElement.placeHolder}}">
         </div>
       </div>
       <div *ngSwitchCase="'email'">
         <div class="form-group">
           <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
-          <input type="email" email class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
-                 placeholder="{{formElement.placeHolder}}">
+          <input type="email" email class="form-control" formControlName="{{formElement.name}}"
+            id="{{formElement.name}}" placeholder="{{formElement.placeHolder}}">
         </div>
       </div>
       <div *ngSwitchCase="'textArea'">
         <div class="form-group">
           <label class="title" for="{{formElement.name}}">{{formElement.title}}:</label>
           <textarea class="form-control" formControlName="{{formElement.name}}" id="{{formElement.name}}"
-                    placeholder="{{formElement.placeHolder}}"></textarea>
+            placeholder="{{formElement.placeHolder}}"></textarea>
         </div>
       </div>
       <div *ngSwitchCase="'radio'" class="radio-input">
@@ -67,8 +68,8 @@
           <label class="title">{{formElement.title}}</label>
           <div>
             <span *ngFor="let option of formElement.options">
-              <input type="radio" name="{{formElement.name}}" class="radio-button" value="{{option.value}}" id="{{option.id}}"
-                     formControlName="{{formElement.name}}">
+              <input type="radio" name="{{formElement.name}}" class="radio-button" value="{{option.value}}"
+                id="{{option.id}}" formControlName="{{formElement.name}}">
               <label [attr.for]="option.id" class="radio-value">{{option.key}}</label>
             </span>
           </div>

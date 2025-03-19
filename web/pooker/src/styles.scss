@@ -15,3 +15,40 @@
   position: absolute;
   cursor: pointer;
 }
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --background-color: #f8f9fa;
+  --text-color: #343a40;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary-color: #343a40;
+  --secondary-color: #6c757d;
+  --background-color: #212529;
+  --text-color: #f8f9fa;
+}
+
+/* Custom Blue Theme */
+[data-theme="blue"] {
+  --primary-color: #0056b3;
+  --secondary-color: #d1ecf1;
+  --background-color: #e9ecef;
+  --text-color: #212529;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.card {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+}

@@ -1,20 +1,89 @@
+// .dropdown-user{
+//     .fa-user-circle-o:before{
+//         font-size: 40px;
+//     }
+//     .dropdown-toggle:empty::after{
+//         display: none;
+//     }
+//     .dropdown-menu{
+//         right: 0px;
+//         left: unset;
+//         .user-info {
+//             display: flex;
+//             flex-direction: column;
+//             padding-left: 10px;
+//         }
+//     }
 
+// }
 
-.dropdown-user{
-    .fa-user-circle-o:before{
-        font-size: 40px;
+/* Styling for the navbar */
+.navbar {
+    padding: 10px 20px;
+}
+
+/* Adjust the font size for the brand */
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Styling for the logout button */
+.logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Optional: Add spacing for user info */
+.text-white {
+    font-size: 16px;
+}
+
+/* Optional: Navbar link active styling */
+.nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.dropdown {
+    .avatar-container{
+        padding: 5px;
+        border: 1px solid white;
+        border-radius: 50%;
     }
-    .dropdown-toggle:empty::after{
-        display: none;
-    }
-    .dropdown-menu{
-        right: 0px;
-        left: unset;
-        .user-info {
-            display: flex;
-            flex-direction: column;
-            padding-left: 10px;
+    &:hover {
+        .dropdown-menu {
+            display: block;
+            right: -50%;
         }
     }
-    
+}
+
+
+/* Optional: Styling for the dropdown menu */
+.dropdown-menu {
+    min-width: 200px;
+}
+
+.dropdown-item {
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Active link styling in dropdown */
+.dropdown-item.active {
+    font-weight: bold;
+    background-color: #e9ecef;
 }
