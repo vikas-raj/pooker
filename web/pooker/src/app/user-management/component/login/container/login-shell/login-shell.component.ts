@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 import { ILoginUserDto } from '../../../../models/ILoginUserDto';
 import { UserManagementService } from 'src/app/user-management/services/user-management.service';
 import { ResponseEnum } from 'src/app/models/ResponseEnum';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-login-shell',
@@ -16,8 +17,10 @@ import { ResponseEnum } from 'src/app/models/ResponseEnum';
   standalone: false
 })
 export class LoginShellComponent implements OnInit {
+  errorMessage: string = '';
 
   constructor(private storeDashboard: Store<fromUserManagement.IUserManagementState>,
+    private authService: AuthService,
     private userManagementService: UserManagementService) { }
 
   ngOnInit(): void {
@@ -26,12 +29,16 @@ export class LoginShellComponent implements OnInit {
   onLoginUser($event: IGenericFormResponse) {
     if ($event.responseType == ResponseEnum.Submit) {
       const loginUserDto: ILoginUserDto = { ...$event.response }
-      this.userManagementService.loginUser(loginUserDto).subscribe((result) => {
-        console.log(result);
-        localStorage.setItem('pooker_token', result?.tokenString);
-      });
-    }else{
-      
+      this.userManagementService.loginUser(loginUserDto).subscribe(
+        (result) => {
+          console.log(result);
+          this.authService.setToken(result?.tokenString);
+        },
+        (err) => {
+          this.errorMessage = 'Invalid credentials';
+        });
+    } else {
+
     }
 
     // this.storeDashboard.dispatch(UserManagementActions.loginUser({ loginUserDto: loginUserDto }))

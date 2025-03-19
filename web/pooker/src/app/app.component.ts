@@ -3,6 +3,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { IUser } from './models/Iuser';
 import { UserHelper } from './services/user-helper.service';
 import { ThemeService } from './services/theme.service';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +16,15 @@ export class AppComponent {
   selectedTheme: string = '';
   title = 'pooker';
   userHelper: UserHelper;
-  constructor(private themeService: ThemeService) {
+  constructor(private themeService: ThemeService, private authService: AuthService,
+    private router: Router
+  ) {
     this.userHelper = new UserHelper()
   }
   ngOnInit() {
-    this.getTokenDetails();
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/user-management/login']);  // Redirect to login if not authenticated
+    }
     this.selectedTheme = this.themeService.getStoredTheme();
     this.themeService.setTheme(this.selectedTheme);
     // this.getDecodedAccessToken();
