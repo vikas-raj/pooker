@@ -22,9 +22,9 @@ export class AppComponent {
     this.userHelper = new UserHelper()
   }
   ngOnInit() {
-    if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['/user-management/login']);  // Redirect to login if not authenticated
-    }
+    // if (!this.authService.isAuthenticated()) {
+    //   this.router.navigate(['/user-management/login']);  // Redirect to login if not authenticated
+    // }
     this.selectedTheme = this.themeService.getStoredTheme();
     this.themeService.setTheme(this.selectedTheme);
     // this.getDecodedAccessToken();

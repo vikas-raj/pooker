@@ -9,6 +9,7 @@ import { ILoginUserDto } from '../../../../models/ILoginUserDto';
 import { UserManagementService } from 'src/app/user-management/services/user-management.service';
 import { ResponseEnum } from 'src/app/models/ResponseEnum';
 import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-shell',
@@ -20,7 +21,7 @@ export class LoginShellComponent implements OnInit {
   errorMessage: string = '';
 
   constructor(private storeDashboard: Store<fromUserManagement.IUserManagementState>,
-    private authService: AuthService,
+    private authService: AuthService, private router: Router,
     private userManagementService: UserManagementService) { }
 
   ngOnInit(): void {
@@ -31,8 +32,8 @@ export class LoginShellComponent implements OnInit {
       const loginUserDto: ILoginUserDto = { ...$event.response }
       this.userManagementService.loginUser(loginUserDto).subscribe(
         (result) => {
-          console.log(result);
           this.authService.setToken(result?.tokenString);
+          this.router.navigate(['/dashboard']); 
         },
         (err) => {
           this.errorMessage = 'Invalid credentials';

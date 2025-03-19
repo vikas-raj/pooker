@@ -33,12 +33,14 @@ export class AuthService {
             const helper = new JwtHelperService();
 
             const decodedToken = helper.decodeToken(token);
-            
+
             const isExpired = helper.isTokenExpired(token);
 
+            console.log(isExpired);
+            console.log(decodedToken);
 
             // If token is expired, return false
-            return isExpired;
+            return !isExpired;
         } catch (e) {
             return false;
         }
